@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Rain&#39;s blog</title>
+  <icon>http://yoursite.com/icon.png</icon>
+  
+  <link href="/blog/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2020-04-17T08:16:00.128Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>Rain</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Type Casting</title>
+    <link href="http://yoursite.com/2020/04/17/type-casting/"/>
+    <id>http://yoursite.com/2020/04/17/type-casting/</id>
+    <published>2020-04-17T14:37:46.000Z</published>
+    <updated>2020-04-17T08:16:00.128Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;简单总结一下JS中的部分显/隐式强制类型转换。&lt;/p&gt;
+&lt;h1 id=&quot;1、类型&quot;&gt;&lt;a href=&quot;#1、类型&quot; class=&quot;headerlink&quot; title=&quot;1、类型&quot;&gt;&lt;/a&gt;1、类型&lt;/h1&gt;&lt;p&gt;JS中6种基本类型：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Undefined, Null, Boolean, Number, Symbol, or String&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;以及对象：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;member of the type Object&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;Boolean的真假值&quot;&gt;&lt;a href=&quot;#Boolean的真假值&quot; class=&quot;headerlink&quot; title=&quot;Boolean的真假值&quot;&gt;&lt;/a&gt;Boolean的真假值&lt;/h2&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="JS" scheme="http://yoursite.com/tags/JS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://yoursite.com/2020/04/17/hello-world/"/>
+    <id>http://yoursite.com/2020/04/17/hello-world/</id>
+    <published>2020-04-17T08:16:00.128Z</published>
+    <updated>2020-04-17T08:16:00.128Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+</feed>
