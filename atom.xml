@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Rain&#39;s blog</title>
-  <icon>http://yushen7.github.io/icon.png</icon>
+  <icon>https://yushen7.github.io/icon.png</icon>
   
   <link href="/blog/atom.xml" rel="self"/>
   
-  <link href="http://yushen7.github.io/"/>
-  <updated>2020-04-17T08:37:09.606Z</updated>
-  <id>http://yushen7.github.io/</id>
+  <link href="https://yushen7.github.io/"/>
+  <updated>2020-04-17T09:03:27.687Z</updated>
+  <id>https://yushen7.github.io/</id>
   
   <author>
     <name>Rain</name>
@@ -18,10 +18,10 @@
   
   <entry>
     <title>Type Casting</title>
-    <link href="http://yushen7.github.io/2020/04/17/type-casting/"/>
-    <id>http://yushen7.github.io/2020/04/17/type-casting/</id>
+    <link href="https://yushen7.github.io/2020/04/17/type-casting/"/>
+    <id>https://yushen7.github.io/2020/04/17/type-casting/</id>
     <published>2020-04-17T14:37:46.000Z</published>
-    <updated>2020-04-17T08:37:09.606Z</updated>
+    <updated>2020-04-17T09:03:27.687Z</updated>
     
     <summary type="html">
     
@@ -40,16 +40,16 @@
     
     
     
-      <category term="JS" scheme="http://yushen7.github.io/tags/JS/"/>
+      <category term="JS" scheme="https://yushen7.github.io/tags/JS/"/>
     
   </entry>
   
   <entry>
     <title>Hello World</title>
-    <link href="http://yushen7.github.io/2020/04/17/hello-world/"/>
-    <id>http://yushen7.github.io/2020/04/17/hello-world/</id>
-    <published>2020-04-17T08:37:09.606Z</published>
-    <updated>2020-04-17T08:37:09.606Z</updated>
+    <link href="https://yushen7.github.io/2020/04/17/hello-world/"/>
+    <id>https://yushen7.github.io/2020/04/17/hello-world/</id>
+    <published>2020-04-17T09:03:27.687Z</published>
+    <updated>2020-04-17T09:03:27.687Z</updated>
     
     <summary type="html">
     
