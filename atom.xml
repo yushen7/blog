@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://yushen7.github.io/"/>
-  <updated>2020-04-17T10:33:16.033Z</updated>
+  <updated>2020-04-18T14:20:45.160Z</updated>
   <id>https://yushen7.github.io/</id>
   
   <author>
@@ -17,11 +17,57 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>prototype</title>
+    <link href="https://yushen7.github.io/2020/04/18/prototype/"/>
+    <id>https://yushen7.github.io/2020/04/18/prototype/</id>
+    <published>2020-04-18T17:21:20.000Z</published>
+    <updated>2020-04-18T14:20:45.160Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文是阅读你不知道的JS（上）-原型部分所做的笔记。&lt;/p&gt;
+&lt;h1 id=&quot;原型与原型链&quot;&gt;&lt;a href=&quot;#原型与原型链&quot; class=&quot;headerlink&quot; title=&quot;原型与原型链&quot;&gt;&lt;/a&gt;原型与原型链&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;函数都有一个&lt;code&gt;prototype&lt;/code&gt;属性。&lt;/li&gt;
+&lt;li&gt;对象&lt;strong&gt;一般&lt;/strong&gt;都有一个&lt;code&gt;[[prototype]]&lt;/code&gt;属性，可以通过&lt;code&gt;[[prototype]]&lt;/code&gt;访问另一个对象，从而把对象和对象串联起来。&lt;/li&gt;
+&lt;li&gt;可通过new调用一个函数，使返回对象的&lt;code&gt;[[prototype]]&lt;/code&gt;和此函数的&lt;code&gt;prototype&lt;/code&gt;建立关联。&lt;/li&gt;
+&lt;li&gt;访问一个对象的属性/方法时，若未在此对象上找到对应的属性/方法，将会沿着原型链一直往上查找，即通过&lt;code&gt;[[prototype]]&lt;/code&gt;查找，直到查找到对应的属性/方法；反之最后会查找到&lt;code&gt;null&lt;/code&gt;，返回&lt;code&gt;undefined&lt;/code&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="https://yushen7.github.io/2020/04/18/hello-world/"/>
+    <id>https://yushen7.github.io/2020/04/18/hello-world/</id>
+    <published>2020-04-18T14:20:45.160Z</published>
+    <updated>2020-04-18T14:20:45.160Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>Type Casting</title>
     <link href="https://yushen7.github.io/2020/04/17/type-casting/"/>
     <id>https://yushen7.github.io/2020/04/17/type-casting/</id>
     <published>2020-04-17T14:37:46.000Z</published>
-    <updated>2020-04-17T10:33:16.033Z</updated>
+    <updated>2020-04-18T14:20:45.160Z</updated>
     
     <summary type="html">
     
@@ -41,29 +87,6 @@
     
     
       <category term="JS" scheme="https://yushen7.github.io/tags/JS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="https://yushen7.github.io/2020/04/17/hello-world/"/>
-    <id>https://yushen7.github.io/2020/04/17/hello-world/</id>
-    <published>2020-04-17T10:33:16.033Z</published>
-    <updated>2020-04-17T10:33:16.033Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a
-        
-      
-    
-    </summary>
-    
-    
     
   </entry>
   
