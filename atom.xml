@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://yushen7.github.io/"/>
-  <updated>2020-04-18T14:20:45.160Z</updated>
+  <updated>2020-05-10T17:43:56.394Z</updated>
   <id>https://yushen7.github.io/</id>
   
   <author>
@@ -17,34 +17,37 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>prototype</title>
-    <link href="https://yushen7.github.io/2020/04/18/prototype/"/>
-    <id>https://yushen7.github.io/2020/04/18/prototype/</id>
-    <published>2020-04-18T17:21:20.000Z</published>
-    <updated>2020-04-18T14:20:45.160Z</updated>
+    <title>补一补line-height</title>
+    <link href="https://yushen7.github.io/2020/05/11/%E8%A1%A5%E4%B8%80%E8%A1%A5line-height/"/>
+    <id>https://yushen7.github.io/2020/05/11/%E8%A1%A5%E4%B8%80%E8%A1%A5line-height/</id>
+    <published>2020-05-11T01:38:34.000Z</published>
+    <updated>2020-05-10T17:43:56.394Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;本文是阅读你不知道的JS（上）-原型部分所做的笔记。&lt;/p&gt;
-&lt;h1 id=&quot;原型与原型链&quot;&gt;&lt;a href=&quot;#原型与原型链&quot; class=&quot;headerlink&quot; title=&quot;原型与原型链&quot;&gt;&lt;/a&gt;原型与原型链&lt;/h1&gt;&lt;ol&gt;
-&lt;li&gt;函数都有一个&lt;code&gt;prototype&lt;/code&gt;属性。&lt;/li&gt;
-&lt;li&gt;对象&lt;strong&gt;一般&lt;/strong&gt;都有一个&lt;code&gt;[[prototype]]&lt;/code&gt;属性，可以通过&lt;code&gt;[[prototype]]&lt;/code&gt;访问另一个对象，从而把对象和对象串联起来。&lt;/li&gt;
-&lt;li&gt;可通过new调用一个函数，使返回对象的&lt;code&gt;[[prototype]]&lt;/code&gt;和此函数的&lt;code&gt;prototype&lt;/code&gt;建立关联。&lt;/li&gt;
-&lt;li&gt;访问一个对象的属性/方法时，若未在此对象上找到对应的属性/方法，将会沿着原型链一直往上查找，即通过&lt;code&gt;[[prototype]]&lt;/code&gt;查找，直到查找到对应的属性/方法；反之最后会查找到&lt;code&gt;null&lt;/code&gt;，返回&lt;code&gt;undefined&lt;/code&gt;。&lt;/li&gt;
-&lt;/ol&gt;
+      
+      
+        
+        
+          &lt;p&gt;补一补CSS基础，从line-height开始。&lt;/p&gt;
+&lt;h1 id=&quot;line-height到底指什么&quot;&gt;&lt;a href=&quot;#line-height到底指什么&quot; class=&quot;headerlink&quot;
+        
+      
     
     </summary>
     
     
     
+      <category term="CSS" scheme="https://yushen7.github.io/tags/CSS/"/>
+    
   </entry>
   
   <entry>
     <title>Hello World</title>
-    <link href="https://yushen7.github.io/2020/04/18/hello-world/"/>
-    <id>https://yushen7.github.io/2020/04/18/hello-world/</id>
-    <published>2020-04-18T14:20:45.160Z</published>
-    <updated>2020-04-18T14:20:45.160Z</updated>
+    <link href="https://yushen7.github.io/2020/05/10/hello-world/"/>
+    <id>https://yushen7.github.io/2020/05/10/hello-world/</id>
+    <published>2020-05-10T17:43:56.394Z</published>
+    <updated>2020-05-10T17:43:56.394Z</updated>
     
     <summary type="html">
     
@@ -63,11 +66,34 @@
   </entry>
   
   <entry>
+    <title>prototype</title>
+    <link href="https://yushen7.github.io/2020/04/18/prototype/"/>
+    <id>https://yushen7.github.io/2020/04/18/prototype/</id>
+    <published>2020-04-18T17:21:20.000Z</published>
+    <updated>2020-05-10T17:43:56.394Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文是阅读你不知道的JS（上）-原型部分所做的笔记。&lt;/p&gt;
+&lt;h1 id=&quot;原型与原型链&quot;&gt;&lt;a href=&quot;#原型与原型链&quot; class=&quot;headerlink&quot; title=&quot;原型与原型链&quot;&gt;&lt;/a&gt;原型与原型链&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;函数都有一个&lt;code&gt;prototype&lt;/code&gt;属性。&lt;/li&gt;
+&lt;li&gt;对象&lt;strong&gt;一般&lt;/strong&gt;都有一个&lt;code&gt;[[prototype]]&lt;/code&gt;属性，可以通过&lt;code&gt;[[prototype]]&lt;/code&gt;访问另一个对象，从而把对象和对象串联起来。&lt;/li&gt;
+&lt;li&gt;可通过new调用一个函数，使返回对象的&lt;code&gt;[[prototype]]&lt;/code&gt;和此函数的&lt;code&gt;prototype&lt;/code&gt;建立关联。&lt;/li&gt;
+&lt;li&gt;访问一个对象的属性/方法时，若未在此对象上找到对应的属性/方法，将会沿着原型链一直往上查找，即通过&lt;code&gt;[[prototype]]&lt;/code&gt;查找，直到查找到对应的属性/方法；反之最后会查找到&lt;code&gt;null&lt;/code&gt;，返回&lt;code&gt;undefined&lt;/code&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>Type Casting</title>
     <link href="https://yushen7.github.io/2020/04/17/type-casting/"/>
     <id>https://yushen7.github.io/2020/04/17/type-casting/</id>
     <published>2020-04-17T14:37:46.000Z</published>
-    <updated>2020-04-18T14:20:45.160Z</updated>
+    <updated>2020-05-10T17:43:56.394Z</updated>
     
     <summary type="html">
     
