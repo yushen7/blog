@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://yushen7.github.io/"/>
-  <updated>2020-05-10T17:43:56.394Z</updated>
+  <updated>2020-05-10T17:47:35.707Z</updated>
   <id>https://yushen7.github.io/</id>
   
   <author>
@@ -21,18 +21,30 @@
     <link href="https://yushen7.github.io/2020/05/11/%E8%A1%A5%E4%B8%80%E8%A1%A5line-height/"/>
     <id>https://yushen7.github.io/2020/05/11/%E8%A1%A5%E4%B8%80%E8%A1%A5line-height/</id>
     <published>2020-05-11T01:38:34.000Z</published>
-    <updated>2020-05-10T17:43:56.394Z</updated>
+    <updated>2020-05-10T17:47:35.707Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;p&gt;补一补CSS基础，从line-height开始。&lt;/p&gt;
-&lt;h1 id=&quot;line-height到底指什么&quot;&gt;&lt;a href=&quot;#line-height到底指什么&quot; class=&quot;headerlink&quot;
-        
-      
+      &lt;p&gt;补一补CSS基础，从line-height开始。&lt;/p&gt;
+&lt;h1 id=&quot;line-height到底指什么&quot;&gt;&lt;a href=&quot;#line-height到底指什么&quot; class=&quot;headerlink&quot; title=&quot;line-height到底指什么&quot;&gt;&lt;/a&gt;line-height到底指什么&lt;/h1&gt;&lt;p&gt;line-height可以粗略认为是：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;由行内级元素组成内容的块状元素的最小的高度。&lt;/li&gt;
+&lt;li&gt;行内元素（non-replaced inline elements）中用来计算line-box的高度的值。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;line-box根据定义是：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The rectangular area that contains the boxes that form a line is called a line box.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;包含着组成一行的框（boxes）的矩形区域。&lt;/p&gt;
+&lt;p&gt;而这些框（boxes）则是行内级（inline-level elements）元素产生的，所以可以看成这个line-box里包含了许多的行内级元素，行内级元素即display属性为：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;inline&lt;/li&gt;
+&lt;li&gt;inline-block&lt;/li&gt;
+&lt;li&gt;inline-table&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;的元素。&lt;/p&gt;
+&lt;p&gt;需要详细说明，挖个坑。&lt;/p&gt;
+&lt;h1 id=&quot;line-height的值&quot;&gt;&lt;a href=&quot;#line-height的值&quot; class=&quot;headerlink&quot; title=&quot;line-height的值&quot;&gt;&lt;/a&gt;line-height的值&lt;/h1&gt;
     
     </summary>
     
@@ -46,8 +58,8 @@
     <title>Hello World</title>
     <link href="https://yushen7.github.io/2020/05/10/hello-world/"/>
     <id>https://yushen7.github.io/2020/05/10/hello-world/</id>
-    <published>2020-05-10T17:43:56.394Z</published>
-    <updated>2020-05-10T17:43:56.394Z</updated>
+    <published>2020-05-10T17:47:35.707Z</published>
+    <updated>2020-05-10T17:47:35.707Z</updated>
     
     <summary type="html">
     
@@ -70,7 +82,7 @@
     <link href="https://yushen7.github.io/2020/04/18/prototype/"/>
     <id>https://yushen7.github.io/2020/04/18/prototype/</id>
     <published>2020-04-18T17:21:20.000Z</published>
-    <updated>2020-05-10T17:43:56.394Z</updated>
+    <updated>2020-05-10T17:47:35.707Z</updated>
     
     <summary type="html">
     
@@ -93,7 +105,7 @@
     <link href="https://yushen7.github.io/2020/04/17/type-casting/"/>
     <id>https://yushen7.github.io/2020/04/17/type-casting/</id>
     <published>2020-04-17T14:37:46.000Z</published>
-    <updated>2020-05-10T17:43:56.394Z</updated>
+    <updated>2020-05-10T17:47:35.707Z</updated>
     
     <summary type="html">
     
