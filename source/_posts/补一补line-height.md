@@ -33,7 +33,7 @@ line-box根据定义是：
 
 
 # line-height的值
-
+<!-- more -->
 5个值：normal | [number](https://www.w3.org/TR/CSS2/syndata.html#value-def-number) | [length](https://www.w3.org/TR/CSS2/syndata.html#value-def-length) | [percentage](https://www.w3.org/TR/CSS2/syndata.html#value-def-percentage) | [inherit](https://www.w3.org/TR/CSS2/cascade.html#value-def-inherit)
 
 默认为：normal
