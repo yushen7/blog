@@ -93,7 +93,7 @@ percentage：为一个比例，用于与`font-size`计算得出`line-height`的�
 </div>
 ```
 
-![1589041732632](C:\Users\lkk\AppData\Roaming\Typora\typora-user-images\1589041732632.png)
+{% asset_img 1.png 继承line-height %}
 
 图中可以看到`line-height`使用数字值的div，行间隔看起来是正常美观的，而其他两者的text则挤在了一起。
 
@@ -119,7 +119,7 @@ percentage：为一个比例，用于与`font-size`计算得出`line-height`的�
 </style>
 ```
 
-![1589042248840](C:\Users\lkk\AppData\Roaming\Typora\typora-user-images\1589042248840.png)
+{% asset_img non-inherit.png 不继承line-height %}
 
 那么，结果便正常了，在p元素上*直接*设置的line-height，不继承，则`line-height`的计算会直接使用其自身的`font-size`进行计算。
 
