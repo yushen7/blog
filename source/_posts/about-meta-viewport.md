@@ -111,7 +111,7 @@ DPR的定义：设备物理像素(physical pixels)  与 设备无关像素 (devi
 
 如果DPR=1，即1个物理像素表示1个CSS像素，那么就相当于将`initial-scale`设置为小于1的值。
 
-{% dpr.png 各型号手机的像素参数表 %}
+{% asset_img dpr.png 各型号手机的像素参数表 %}
 
 上图是移动端设备有关于像素的值，可以看到逻辑分辨率和物理分辨率两列，其实就对应逻辑像素（CSS像素）和物理像素。而设置`initial-scale=1`就相当于把`layout viewport`设置为逻辑分辨率的宽度而已。
 
