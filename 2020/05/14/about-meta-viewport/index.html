@@ -27,16 +27,16 @@
 <meta property="og:site_name" content="Rain&#39;s blog">
 <meta property="og:description" content="很久很久以前，在适配移动端的时候，第一次听到viewport这个概念。 只知道一股脑儿复制：    当时不知道是什么意思，查了几篇文章后未果。 近期好好读了远古时期介绍viewport的博客，准备对这个概念做一个梳理。 博客文章地址：A tale of two viewports — 1 没有找出关于viewport的标准定义，以下内容是结合了该博客viewport概念系列的一家之见。 meta中">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://yushen7.github.io/2020/05/14/about-meta-viewport/pc.png">
-<meta property="og:image" content="https://yushen7.github.io/2020/05/14/about-meta-viewport/mobile.png">
-<meta property="og:image" content="https://yushen7.github.io/2020/05/14/about-meta-viewport/set_viewport_mobile.png">
-<meta property="og:image" content="https://yushen7.github.io/2020/05/14/about-meta-viewport/dpr.png">
+<meta property="og:image" content="https://yushen7.github.io/blog/2020/05/14/about-meta-viewport/pc.png">
+<meta property="og:image" content="https://yushen7.github.io/blog/2020/05/14/about-meta-viewport/mobile.png">
+<meta property="og:image" content="https://yushen7.github.io/blog/2020/05/14/about-meta-viewport/set_viewport_mobile.png">
+<meta property="og:image" content="https://yushen7.github.io/blog/2020/05/14/about-meta-viewport/dpr.png">
 <meta property="article:published_time" content="2020-05-14T01:33:11.000Z">
-<meta property="article:modified_time" content="2020-05-13T17:34:59.911Z">
+<meta property="article:modified_time" content="2020-05-13T19:20:58.943Z">
 <meta property="article:author" content="Rain">
 <meta property="article:tag" content="Front-end">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://yushen7.github.io/2020/05/14/about-meta-viewport/pc.png">
+<meta name="twitter:image" content="https://yushen7.github.io/blog/2020/05/14/about-meta-viewport/pc.png">
 
 <link rel="canonical" href="https://yushen7.github.io/2020/05/14/about-meta-viewport/">
 
@@ -200,7 +200,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-13 17:34:59" itemprop="dateModified" datetime="2020-05-13T17:34:59+00:00">2020-05-13</time>
+                <time title="Modified: 2020-05-13 19:20:58" itemprop="dateModified" datetime="2020-05-13T19:20:58+00:00">2020-05-13</time>
               </span>
 
           
@@ -260,8 +260,10 @@
 <p>个人认为虚拟概念只是方便理解的，实际上不存在，归根结底还是对DOM的操作，以及可见范围（视窗）的缩放。</p>
 <p>为PC端开发的网页在移动端上显示的话，由于设备的尺寸原因，绝大多数移动端的浏览器按照桌面端的显示方式显示网页肯定显示不全，所以移动端增添了viewport这一概念，使得在移动端上也能单屏展示一个网页。</p>
 <p>如下图，同一个网页不设置viewport时，在桌面端和移动端上的显示效果：</p>
-<p><img src="pc.png" alt="pc端"></p>
-<p><img src="mobile.png" alt="移动端"></p>
+<img src="/blog/2020/05/14/about-meta-viewport/pc.png" class="" title="pc端">
+
+<img src="/blog/2020/05/14/about-meta-viewport/mobile.png" class="" title="移动端">
+
 <p>可以看出一个明显的区别：<strong>移动端的网页明显被缩小了，</strong>且<code>document.documentElement.clientWidth</code>为<code>980px</code>，不同浏览器、手机的值都不一样，该值可以看成<code>layout viewport</code>的值。</p>
 <p>这种情况下，需要用户手动放大，才能完全看清楚内容，</p>
 <p>那么，如果我们想解决移动端缩小网页（或者说强行设置viewport）的问题的话，就可以使用meta中的viewport了。</p>
@@ -271,10 +273,13 @@
 <p>说明不对viewport进行缩放，该值可以认为是<code>ideal viewport</code>的值，可以从<code>screen.width</code>或<code>window.innerWidth</code>获得。</p>
 <p>简而言之，这就是<strong>移动端设备</strong>的物理像素宽度，这个设备有多大，就显示多大的区域。</p>
 <p>设置之后效果如下：</p>
-<p><img src="set_viewport_mobile.png" alt="After setting viewport"></p>
+<img src="/blog/2020/05/14/about-meta-viewport/set_viewport_mobile.png" class="" title="After setting viewport">
+
 <p>这时候再获取一下<code>document.documentElement.clientWidth</code>就为<code>320px</code>了。</p>
 <p><strong>所以对viewport的设置实际上可以看作是改变了<code>document.documentElement.clientWidth</code>的值。</strong></p>
-<h2 id="总的来说"><a href="#总的来说" class="headerlink" title="总的来说"></a>总的来说</h2><p>浏览器一屏到底显示多少内容。而显示多少内容取决于网页的大小，即<code>html</code>元素的大小，移动端只是自动设置了一个值（例如<code>width=980px</code>）或者缩放（例如<code>initial-scale=0.5</code>），使得一个<code>375px</code>的屏幕可以显示更多内容。</p>
+<h2 id="总的来说"><a href="#总的来说" class="headerlink" title="总的来说"></a>总的来说</h2><a id="more"></a>
+
+<p>浏览器一屏到底显示多少内容。而显示多少内容取决于网页的大小，即<code>html</code>元素的大小，移动端只是自动设置了一个值（例如<code>width=980px</code>）或者缩放（例如<code>initial-scale=0.5</code>），使得一个<code>375px</code>的屏幕可以显示更多内容。</p>
 <h1 id="网页中的缩放"><a href="#网页中的缩放" class="headerlink" title="网页中的缩放"></a>网页中的缩放</h1><p>在PC端中缩小一个网页，会导致网页内容变得越来越小，而观察<code>document.documentElement.clientWidth/clientHeight</code>，则会发现该值越来越大从而导致网页内容越来越小；而放大也是如此。</p>
 <p>在移动端中缩放一个网页和PC端的情况类似。而不设置viewport的宽度，则会导致网页内容被缩小，所以我们可以认为：移动端的浏览器自动地为网页设置了一个缩放值，从而在一个物理像素中显示了更多的CSS像素。而我们设置viewport所做的只是将缩放值调回正常缩放而已。通过<code>width=device-width</code>或<code>initial-scale=1.0</code>都可以办到这一点。</p>
 <p>而<code>visual viewport</code>的概念，顾名思义就是视野，当前窗口能显示的网页区域。当放大网页时，会出现左右滚动条，网页内容显示不全，需要拖动滚动条来浏览全部区域。所以<code>visual viewport</code>的大小绝对小于等于<code>layout viewport</code>（或者说是<code>html</code>元素）的大小。</p>
@@ -291,7 +296,8 @@
 </ol>
 <p>如果DPR&gt;1，即使用多于1个的物理像素表示1个CSS像素。</p>
 <p>如果DPR=1，即1个物理像素表示1个CSS像素，那么就相当于将<code>initial-scale</code>设置为小于1的值。</p>
-<p><img src="dpr.png" alt="dpr"></p>
+<img src="/blog/2020/05/14/about-meta-viewport/dpr.png" class="" title="各型号手机的像素参数表">
+
 <p>上图是移动端设备有关于像素的值，可以看到逻辑分辨率和物理分辨率两列，其实就对应逻辑像素（CSS像素）和物理像素。而设置<code>initial-scale=1</code>就相当于把<code>layout viewport</code>设置为逻辑分辨率的宽度而已。</p>
 <p>由于物理分辨率的数值普遍大于逻辑分辨率的数值，我们可以认为移动端的设备显示的单位的尺寸更小，因而用更多的像素去显示同一个图形（即DPR越大），会显得更细腻。</p>
 <h2 id="总的来说-1"><a href="#总的来说-1" class="headerlink" title="总的来说"></a>总的来说</h2><p>DPR越大意味着物理分辨率与逻辑分辨率的差值越大，像素密度越大，代表相同尺寸的屏幕可以显示更多的内容（内容看起来被缩小了）。</p>

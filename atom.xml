@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://yushen7.github.io/"/>
-  <updated>2020-05-13T17:34:59.911Z</updated>
+  <updated>2020-05-13T19:20:58.943Z</updated>
   <id>https://yushen7.github.io/</id>
   
   <author>
@@ -21,20 +21,53 @@
     <link href="https://yushen7.github.io/2020/05/14/about-meta-viewport/"/>
     <id>https://yushen7.github.io/2020/05/14/about-meta-viewport/</id>
     <published>2020-05-14T01:33:11.000Z</published>
-    <updated>2020-05-13T17:34:59.911Z</updated>
+    <updated>2020-05-13T19:20:58.943Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;p&gt;很久很久以前，在适配移动端的时候，第一次听到viewport这个概念。&lt;/p&gt;
+      &lt;p&gt;很久很久以前，在适配移动端的时候，第一次听到viewport这个概念。&lt;/p&gt;
 &lt;p&gt;只知道一股脑儿复制：&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1.0,
-        
-      
+&lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1.0, width=device-width, user-scalable=no, maximum-scale=1.0&quot;&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;当时不知道是什么意思，查了几篇文章后未果。&lt;/p&gt;
+&lt;p&gt;近期好好读了远古时期介绍viewport的博客，准备对这个概念做一个梳理。&lt;/p&gt;
+&lt;p&gt;博客文章地址：&lt;a href=&quot;https://quirksmode.org/mobile/viewports.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;A tale of two viewports — 1&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;没有找出关于&lt;code&gt;viewport&lt;/code&gt;的标准定义，以下内容是结合了该博客viewport概念系列的一家之见。&lt;/p&gt;
+&lt;h1 id=&quot;meta中的viewport&quot;&gt;&lt;a href=&quot;#meta中的viewport&quot; class=&quot;headerlink&quot; title=&quot;meta中的viewport&quot;&gt;&lt;/a&gt;meta中的viewport&lt;/h1&gt;&lt;p&gt;meta中的viewport有几个键值对，写在content里：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;initial-scale=n&lt;/code&gt;：初始缩放值，&lt;code&gt;n&lt;/code&gt;为一个数值。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;width=[device-width/n]&lt;/code&gt;：宽度，值可以为&lt;code&gt;device-width&lt;/code&gt;或&lt;code&gt;n&lt;/code&gt;，&lt;code&gt;n&lt;/code&gt;为CSS像素值。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;user-scalable=[yes/no]&lt;/code&gt;：是否允许用户缩放。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;maximum-scale=n&lt;/code&gt;：最大缩放值，&lt;code&gt;n&lt;/code&gt;为一个数值。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;viewport可分为三种：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;layout viewport&lt;/code&gt;，该概念与&lt;code&gt;html&lt;/code&gt;元素的宽度相似，对应meta中的viewport。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;visual viewport&lt;/code&gt;，对应可见的viewport，即可见视窗，能看见的范围。（虚拟概念）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ideal viewport&lt;/code&gt;，直译过来是：理想情况下的viewport。（虚拟概念）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;个人认为虚拟概念只是方便理解的，实际上不存在，归根结底还是对DOM的操作，以及可见范围（视窗）的缩放。&lt;/p&gt;
+&lt;p&gt;为PC端开发的网页在移动端上显示的话，由于设备的尺寸原因，绝大多数移动端的浏览器按照桌面端的显示方式显示网页肯定显示不全，所以移动端增添了viewport这一概念，使得在移动端上也能单屏展示一个网页。&lt;/p&gt;
+&lt;p&gt;如下图，同一个网页不设置viewport时，在桌面端和移动端上的显示效果：&lt;/p&gt;
+&lt;img src=&quot;/blog/2020/05/14/about-meta-viewport/pc.png&quot; class=&quot;&quot; title=&quot;pc端&quot;&gt;
+
+&lt;img src=&quot;/blog/2020/05/14/about-meta-viewport/mobile.png&quot; class=&quot;&quot; title=&quot;移动端&quot;&gt;
+
+&lt;p&gt;可以看出一个明显的区别：&lt;strong&gt;移动端的网页明显被缩小了，&lt;/strong&gt;且&lt;code&gt;document.documentElement.clientWidth&lt;/code&gt;为&lt;code&gt;980px&lt;/code&gt;，不同浏览器、手机的值都不一样，该值可以看成&lt;code&gt;layout viewport&lt;/code&gt;的值。&lt;/p&gt;
+&lt;p&gt;这种情况下，需要用户手动放大，才能完全看清楚内容，&lt;/p&gt;
+&lt;p&gt;那么，如果我们想解决移动端缩小网页（或者说强行设置viewport）的问题的话，就可以使用meta中的viewport了。&lt;/p&gt;
+&lt;p&gt;设置：&lt;/p&gt;
+&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;meta&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;name&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;viewport&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;content&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;width:device-width,initial-scale=1.0&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;说明不对viewport进行缩放，该值可以认为是&lt;code&gt;ideal viewport&lt;/code&gt;的值，可以从&lt;code&gt;screen.width&lt;/code&gt;或&lt;code&gt;window.innerWidth&lt;/code&gt;获得。&lt;/p&gt;
+&lt;p&gt;简而言之，这就是&lt;strong&gt;移动端设备&lt;/strong&gt;的物理像素宽度，这个设备有多大，就显示多大的区域。&lt;/p&gt;
+&lt;p&gt;设置之后效果如下：&lt;/p&gt;
+&lt;img src=&quot;/blog/2020/05/14/about-meta-viewport/set_viewport_mobile.png&quot; class=&quot;&quot; title=&quot;After setting viewport&quot;&gt;
+
+&lt;p&gt;这时候再获取一下&lt;code&gt;document.documentElement.clientWidth&lt;/code&gt;就为&lt;code&gt;320px&lt;/code&gt;了。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;所以对viewport的设置实际上可以看作是改变了&lt;code&gt;document.documentElement.clientWidth&lt;/code&gt;的值。&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&quot;总的来说&quot;&gt;&lt;a href=&quot;#总的来说&quot; class=&quot;headerlink&quot; title=&quot;总的来说&quot;&gt;&lt;/a&gt;总的来说&lt;/h2&gt;
     
     </summary>
     
@@ -49,7 +82,7 @@
     <link href="https://yushen7.github.io/2020/05/11/about_line-height/"/>
     <id>https://yushen7.github.io/2020/05/11/about_line-height/</id>
     <published>2020-05-11T01:38:34.000Z</published>
-    <updated>2020-05-13T17:34:59.915Z</updated>
+    <updated>2020-05-13T19:20:58.943Z</updated>
     
     <summary type="html">
     
@@ -87,7 +120,7 @@
     <link href="https://yushen7.github.io/2020/04/18/prototype/"/>
     <id>https://yushen7.github.io/2020/04/18/prototype/</id>
     <published>2020-04-18T17:21:20.000Z</published>
-    <updated>2020-05-13T17:34:59.915Z</updated>
+    <updated>2020-05-13T19:20:58.947Z</updated>
     
     <summary type="html">
     
@@ -110,7 +143,7 @@
     <link href="https://yushen7.github.io/2020/04/17/type-casting/"/>
     <id>https://yushen7.github.io/2020/04/17/type-casting/</id>
     <published>2020-04-17T14:37:46.000Z</published>
-    <updated>2020-05-13T17:34:59.915Z</updated>
+    <updated>2020-05-13T19:20:58.947Z</updated>
     
     <summary type="html">
     
