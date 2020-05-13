@@ -1,9 +1,7 @@
 ---
 title: meta中的viewport
 tags: Front-end
-date: 2020-05-14 01:33:11
 ---
-
 
 很久很久以前，在适配移动端的时候，第一次听到viewport这个概念。
 
@@ -40,9 +38,9 @@ viewport可分为三种：
 
 如下图，同一个网页不设置viewport时，在桌面端和移动端上的显示效果：
 
-{% asset_img pc.png pc端 %}
+![pc端](pc.png)
 
-{% asset_img mobile.png 移动端 %}
+![移动端](mobile.png)
 
 可以看出一个明显的区别：**移动端的网页明显被缩小了，**且`document.documentElement.clientWidth`为`980px`，不同浏览器、手机的值都不一样，该值可以看成`layout viewport`的值。
 
@@ -62,7 +60,7 @@ viewport可分为三种：
 
 设置之后效果如下：
 
-{% asset_img set_viewport_mobile.png After setting viewport  %}
+![After setting viewport](set_viewport_mobile.png)
 
 这时候再获取一下`document.documentElement.clientWidth`就为`320px`了。
 
@@ -71,8 +69,6 @@ viewport可分为三种：
 
 
 ## 总的来说
-
-<!-- more -->
 
 浏览器一屏到底显示多少内容。而显示多少内容取决于网页的大小，即`html`元素的大小，移动端只是自动设置了一个值（例如`width=980px`）或者缩放（例如`initial-scale=0.5`），使得一个`375px`的屏幕可以显示更多内容。
 
@@ -89,8 +85,6 @@ viewport可分为三种：
 该网址可以体验这个效果：[Viewport visualization app ALPHA](https://www.quirksmode.org/mobile/viewports/)
 
 # 关于DPR（devicePixelRatio）
-
-
 
 以上内容都围绕着`html`元素的大小说明`viewport`，未提及像素的概念。
 
@@ -111,7 +105,7 @@ DPR的定义：设备物理像素(physical pixels)  与 设备无关像素 (devi
 
 如果DPR=1，即1个物理像素表示1个CSS像素，那么就相当于将`initial-scale`设置为小于1的值。
 
-{% dpr.png 各型号手机的像素参数表 %}
+![dpr](dpr.png)
 
 上图是移动端设备有关于像素的值，可以看到逻辑分辨率和物理分辨率两列，其实就对应逻辑像素（CSS像素）和物理像素。而设置`initial-scale=1`就相当于把`layout viewport`设置为逻辑分辨率的宽度而已。
 
