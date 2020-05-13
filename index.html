@@ -159,7 +159,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://yushen7.github.io/2020/05/13/hello-world/">
+    <link itemprop="mainEntityOfPage" href="https://yushen7.github.io/2020/05/14/about-meta-viewport/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
@@ -173,7 +173,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/blog/2020/05/13/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
+            <a href="/blog/2020/05/14/about-meta-viewport/" class="post-title-link" itemprop="url">meta中的viewport</a>
         </h2>
 
         <div class="post-meta">
@@ -183,8 +183,15 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-05-13 17:24:08" itemprop="dateCreated datePublished" datetime="2020-05-13T17:24:08+00:00">2020-05-13</time>
+              <time title="Created: 2020-05-14 01:33:11" itemprop="dateCreated datePublished" datetime="2020-05-14T01:33:11+00:00">2020-05-14</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-13 17:34:59" itemprop="dateModified" datetime="2020-05-13T17:34:59+00:00">2020-05-13</time>
+              </span>
 
           <br>
             <span class="post-meta-item" title="Symbols count in article">
@@ -192,14 +199,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>357</span>
+              <span>2.5k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
+              <span>2 mins.</span>
             </span>
 
         </div>
@@ -211,19 +218,66 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+          <p>很久很久以前，在适配移动端的时候，第一次听到viewport这个概念。</p>
+<p>只知道一股脑儿复制：</p>
+<blockquote>
+<meta name="viewport" content="initial-scale=1.0, width=device-width, user-scalable=no, maximum-scale=1.0">
+</blockquote>
+<p>当时不知道是什么意思，查了几篇文章后未果。</p>
+<p>近期好好读了远古时期介绍viewport的博客，准备对这个概念做一个梳理。</p>
+<p>博客文章地址：<a href="https://quirksmode.org/mobile/viewports.html" target="_blank" rel="noopener">A tale of two viewports — 1</a></p>
+<p>没有找出关于<code>viewport</code>的标准定义，以下内容是结合了该博客viewport概念系列的一家之见。</p>
+<h1 id="meta中的viewport"><a href="#meta中的viewport" class="headerlink" title="meta中的viewport"></a>meta中的viewport</h1><p>meta中的viewport有几个键值对，写在content里：</p>
+<ol>
+<li><code>initial-scale=n</code>：初始缩放值，<code>n</code>为一个数值。</li>
+<li><code>width=[device-width/n]</code>：宽度，值可以为<code>device-width</code>或<code>n</code>，<code>n</code>为CSS像素值。</li>
+<li><code>user-scalable=[yes/no]</code>：是否允许用户缩放。</li>
+<li><code>maximum-scale=n</code>：最大缩放值，<code>n</code>为一个数值。</li>
+</ol>
+<p>viewport可分为三种：</p>
+<ol>
+<li><code>layout viewport</code>，该概念与<code>html</code>元素的宽度相似，对应meta中的viewport。</li>
+<li><code>visual viewport</code>，对应可见的viewport，即可见视窗，能看见的范围。（虚拟概念）</li>
+<li><code>ideal viewport</code>，直译过来是：理想情况下的viewport。（虚拟概念）</li>
+</ol>
+<p>个人认为虚拟概念只是方便理解的，实际上不存在，归根结底还是对DOM的操作，以及可见范围（视窗）的缩放。</p>
+<p>为PC端开发的网页在移动端上显示的话，由于设备的尺寸原因，绝大多数移动端的浏览器按照桌面端的显示方式显示网页肯定显示不全，所以移动端增添了viewport这一概念，使得在移动端上也能单屏展示一个网页。</p>
+<p>如下图，同一个网页不设置viewport时，在桌面端和移动端上的显示效果：</p>
+<p><img src="pc.png" alt="pc端"></p>
+<p><img src="mobile.png" alt="移动端"></p>
+<p>可以看出一个明显的区别：<strong>移动端的网页明显被缩小了，</strong>且<code>document.documentElement.clientWidth</code>为<code>980px</code>，不同浏览器、手机的值都不一样，该值可以看成<code>layout viewport</code>的值。</p>
+<p>这种情况下，需要用户手动放大，才能完全看清楚内容，</p>
+<p>那么，如果我们想解决移动端缩小网页（或者说强行设置viewport）的问题的话，就可以使用meta中的viewport了。</p>
+<p>设置：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width:device-width,initial-scale=1.0"</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<p>说明不对viewport进行缩放，该值可以认为是<code>ideal viewport</code>的值，可以从<code>screen.width</code>或<code>window.innerWidth</code>获得。</p>
+<p>简而言之，这就是<strong>移动端设备</strong>的物理像素宽度，这个设备有多大，就显示多大的区域。</p>
+<p>设置之后效果如下：</p>
+<p><img src="set_viewport_mobile.png" alt="After setting viewport"></p>
+<p>这时候再获取一下<code>document.documentElement.clientWidth</code>就为<code>320px</code>了。</p>
+<p><strong>所以对viewport的设置实际上可以看作是改变了<code>document.documentElement.clientWidth</code>的值。</strong></p>
+<h2 id="总的来说"><a href="#总的来说" class="headerlink" title="总的来说"></a>总的来说</h2><p>浏览器一屏到底显示多少内容。而显示多少内容取决于网页的大小，即<code>html</code>元素的大小，移动端只是自动设置了一个值（例如<code>width=980px</code>）或者缩放（例如<code>initial-scale=0.5</code>），使得一个<code>375px</code>的屏幕可以显示更多内容。</p>
+<h1 id="网页中的缩放"><a href="#网页中的缩放" class="headerlink" title="网页中的缩放"></a>网页中的缩放</h1><p>在PC端中缩小一个网页，会导致网页内容变得越来越小，而观察<code>document.documentElement.clientWidth/clientHeight</code>，则会发现该值越来越大从而导致网页内容越来越小；而放大也是如此。</p>
+<p>在移动端中缩放一个网页和PC端的情况类似。而不设置viewport的宽度，则会导致网页内容被缩小，所以我们可以认为：移动端的浏览器自动地为网页设置了一个缩放值，从而在一个物理像素中显示了更多的CSS像素。而我们设置viewport所做的只是将缩放值调回正常缩放而已。通过<code>width=device-width</code>或<code>initial-scale=1.0</code>都可以办到这一点。</p>
+<p>而<code>visual viewport</code>的概念，顾名思义就是视野，当前窗口能显示的网页区域。当放大网页时，会出现左右滚动条，网页内容显示不全，需要拖动滚动条来浏览全部区域。所以<code>visual viewport</code>的大小绝对小于等于<code>layout viewport</code>（或者说是<code>html</code>元素）的大小。</p>
+<p>该网址可以体验这个效果：<a href="https://www.quirksmode.org/mobile/viewports/" target="_blank" rel="noopener">Viewport visualization app ALPHA</a></p>
+<h1 id="关于DPR（devicePixelRatio）"><a href="#关于DPR（devicePixelRatio）" class="headerlink" title="关于DPR（devicePixelRatio）"></a>关于DPR（devicePixelRatio）</h1><p>以上内容都围绕着<code>html</code>元素的大小说明<code>viewport</code>，未提及像素的概念。</p>
+<p>DPR的定义：设备物理像素(physical pixels)  与 设备无关像素 (device-independent pixels (dips))的比值，<code>devicePixelRatio = physical pixels / dips</code>。</p>
+<p>物理像素即设备的像素，实际能显示的像素个数。</p>
+<p>设备无关像素称作逻辑像素，即CSS像素。</p>
+<p>通过<code>window.devicePixelRatio</code>获取。</p>
+<p>对网页的缩放，实际上是改变了物理像素和CSS像素的比例：</p>
+<ol>
+<li>用更多的物理像素表示CSS像素，意味着看起来更大，即放大。</li>
+<li>用更少的物理像素表示CSS像素，意味着看起来更小，即缩小。</li>
+</ol>
+<p>如果DPR&gt;1，即使用多于1个的物理像素表示1个CSS像素。</p>
+<p>如果DPR=1，即1个物理像素表示1个CSS像素，那么就相当于将<code>initial-scale</code>设置为小于1的值。</p>
+<p><img src="dpr.png" alt="dpr"></p>
+<p>上图是移动端设备有关于像素的值，可以看到逻辑分辨率和物理分辨率两列，其实就对应逻辑像素（CSS像素）和物理像素。而设置<code>initial-scale=1</code>就相当于把<code>layout viewport</code>设置为逻辑分辨率的宽度而已。</p>
+<p>由于物理分辨率的数值普遍大于逻辑分辨率的数值，我们可以认为移动端的设备显示的单位的尺寸更小，因而用更多的像素去显示同一个图形（即DPR越大），会显得更细腻。</p>
+<h2 id="总的来说-1"><a href="#总的来说-1" class="headerlink" title="总的来说"></a>总的来说</h2><p>DPR越大意味着物理分辨率与逻辑分辨率的差值越大，像素密度越大，代表相同尺寸的屏幕可以显示更多的内容（内容看起来被缩小了）。</p>
 
       
     </div>
@@ -274,7 +328,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-13 17:24:08" itemprop="dateModified" datetime="2020-05-13T17:24:08+00:00">2020-05-13</time>
+                <time title="Modified: 2020-05-13 17:34:59" itemprop="dateModified" datetime="2020-05-13T17:34:59+00:00">2020-05-13</time>
               </span>
 
           <br>
@@ -379,7 +433,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-13 17:24:08" itemprop="dateModified" datetime="2020-05-13T17:24:08+00:00">2020-05-13</time>
+                <time title="Modified: 2020-05-13 17:34:59" itemprop="dateModified" datetime="2020-05-13T17:34:59+00:00">2020-05-13</time>
               </span>
 
           <br>
@@ -471,7 +525,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-13 17:24:08" itemprop="dateModified" datetime="2020-05-13T17:24:08+00:00">2020-05-13</time>
+                <time title="Modified: 2020-05-13 17:34:59" itemprop="dateModified" datetime="2020-05-13T17:34:59+00:00">2020-05-13</time>
               </span>
 
           <br>
@@ -602,7 +656,7 @@
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -639,13 +693,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">11k</span>
+    <span title="Symbols count total">14k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">10 mins.</span>
+    <span title="Reading time total">12 mins.</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
   </div>

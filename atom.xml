@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://yushen7.github.io/"/>
-  <updated>2020-05-13T17:24:08.076Z</updated>
+  <updated>2020-05-13T17:34:59.911Z</updated>
   <id>https://yushen7.github.io/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Hello World</title>
-    <link href="https://yushen7.github.io/2020/05/13/hello-world/"/>
-    <id>https://yushen7.github.io/2020/05/13/hello-world/</id>
-    <published>2020-05-13T17:24:08.076Z</published>
-    <updated>2020-05-13T17:24:08.076Z</updated>
+    <title>meta中的viewport</title>
+    <link href="https://yushen7.github.io/2020/05/14/about-meta-viewport/"/>
+    <id>https://yushen7.github.io/2020/05/14/about-meta-viewport/</id>
+    <published>2020-05-14T01:33:11.000Z</published>
+    <updated>2020-05-13T17:34:59.911Z</updated>
     
     <summary type="html">
     
@@ -29,13 +29,18 @@
       
         
         
-          &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a
+          &lt;p&gt;很久很久以前，在适配移动端的时候，第一次听到viewport这个概念。&lt;/p&gt;
+&lt;p&gt;只知道一股脑儿复制：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1.0,
         
       
     
     </summary>
     
     
+    
+      <category term="Front-end" scheme="https://yushen7.github.io/tags/Front-end/"/>
     
   </entry>
   
@@ -44,7 +49,7 @@
     <link href="https://yushen7.github.io/2020/05/11/about_line-height/"/>
     <id>https://yushen7.github.io/2020/05/11/about_line-height/</id>
     <published>2020-05-11T01:38:34.000Z</published>
-    <updated>2020-05-13T17:24:08.076Z</updated>
+    <updated>2020-05-13T17:34:59.915Z</updated>
     
     <summary type="html">
     
@@ -82,7 +87,7 @@
     <link href="https://yushen7.github.io/2020/04/18/prototype/"/>
     <id>https://yushen7.github.io/2020/04/18/prototype/</id>
     <published>2020-04-18T17:21:20.000Z</published>
-    <updated>2020-05-13T17:24:08.076Z</updated>
+    <updated>2020-05-13T17:34:59.915Z</updated>
     
     <summary type="html">
     
@@ -105,7 +110,7 @@
     <link href="https://yushen7.github.io/2020/04/17/type-casting/"/>
     <id>https://yushen7.github.io/2020/04/17/type-casting/</id>
     <published>2020-04-17T14:37:46.000Z</published>
-    <updated>2020-05-13T17:24:08.076Z</updated>
+    <updated>2020-05-13T17:34:59.915Z</updated>
     
     <summary type="html">
     
