@@ -1,5 +1,5 @@
 ---
-title: prototype
+title: 原型与原型链
 date: 2020-04-18 17:21:20
 tags: Javascript
 updated: 2020-05-14 16:00:31
@@ -27,7 +27,7 @@ ECMA-262对于原型的定义（prototype）：
 
 ```javascript
 // 1. 无return语句或者return值非对象
-let fn = funciton(){
+let fn = function(){
     this.name = 'oo';
     return 1
 };
