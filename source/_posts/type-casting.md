@@ -1,7 +1,7 @@
 ---
 title: Type Casting
 date: 2020-04-17 14:37:46
-tags: [JS]
+tags: Javascript
 ---
 
 简单总结一下JS中的部分显/隐式强制类型转换。

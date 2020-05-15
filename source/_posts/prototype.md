@@ -1,11 +1,16 @@
 ---
 title: prototype
 date: 2020-04-18 17:21:20
-tags:
+tags: Javascript
+updated: 2020-05-14 16:00:31
 ---
 本文是阅读你不知道的JS（上）-原型部分所做的笔记。
 
 # 原型与原型链
+
+ECMA-262对于原型的定义（prototype）：
+
+> object that provides shared properties for other objects
 
 1. 函数都有一个`prototype`属性。
 2. 对象**一般**都有一个`[[prototype]]`属性，可以通过`[[prototype]]`访问另一个对象，从而把对象和对象串联起来。
@@ -82,7 +87,7 @@ o.hasOwnProperty === undefined // true
 
 # 属性屏蔽
 
-当去读一个属性时，会先查找对象本身是否有这个属性，若无，则会通过[[prototype]]逐级向上依次查找，即原型链查找；反之，则取这个对象本身的属性。
+当去读一个属性时，会先查找对象本身是否有这个属性，若无，则会通过`[[prototype]]`逐级向上依次查找，即原型链查找；反之，则取这个对象本身的属性。
 
 看以下代码：
 
