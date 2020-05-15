@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://yushen7.github.io/"/>
-  <updated>2020-05-13T19:20:58.943Z</updated>
+  <updated>2020-05-15T09:34:36.304Z</updated>
   <id>https://yushen7.github.io/</id>
   
   <author>
@@ -17,11 +17,73 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>认识new操作符</title>
+    <link href="https://yushen7.github.io/2020/05/15/about-new-operator/"/>
+    <id>https://yushen7.github.io/2020/05/15/about-new-operator/</id>
+    <published>2020-05-15T17:33:11.000Z</published>
+    <updated>2020-05-15T09:34:36.304Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;看了&lt;a href=&quot;https://github.com/mqyqingfeng/Blog&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;冴羽的Javscript博客&lt;/a&gt;，同样模拟一下&lt;code&gt;new&lt;/code&gt;的功能实现&lt;/p&gt;
+&lt;h1
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="Javascript" scheme="https://yushen7.github.io/tags/Javascript/"/>
+    
+      <category term="Operator" scheme="https://yushen7.github.io/tags/Operator/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JS中的对象</title>
+    <link href="https://yushen7.github.io/2020/05/15/operate-object/"/>
+    <id>https://yushen7.github.io/2020/05/15/operate-object/</id>
+    <published>2020-05-15T13:27:17.000Z</published>
+    <updated>2020-05-15T09:34:36.304Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;此文为关于JS中对象的笔记。&lt;/p&gt;
+&lt;p&gt;ECMA-26对于对象的定义：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;In ECMAScript, the state and methods are carried by objects, while&lt;br&gt;structure, behaviour, and state are all inherited.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;高程（中文版）：“无序属性的集合，其属性可以包含基本值、对象或者函数。”&lt;/p&gt;
+&lt;p&gt;简而言之，在Ecmascript中：&lt;strong&gt;对象是键值对（key-value）的集合&lt;/strong&gt;。&lt;/p&gt;
+&lt;h1 id=&quot;对象属性的特性-attribute&quot;&gt;&lt;a href=&quot;#对象属性的特性-attribute&quot; class=&quot;headerlink&quot; title=&quot;对象属性的特性(attribute)&quot;&gt;&lt;/a&gt;对象属性的特性(attribute)&lt;/h1&gt;&lt;p&gt;对象的属性有两种：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;数据属性。&lt;/li&gt;
+&lt;li&gt;访问器属性。通过getter和setter取值和赋值。&lt;/li&gt;
+&lt;/ol&gt;
+    
+    </summary>
+    
+    
+      <category term="Front-end" scheme="https://yushen7.github.io/categories/Front-end/"/>
+    
+    
+      <category term="Javascript" scheme="https://yushen7.github.io/tags/Javascript/"/>
+    
+      <category term="Object" scheme="https://yushen7.github.io/tags/Object/"/>
+    
+  </entry>
+  
+  <entry>
     <title>meta中的viewport</title>
     <link href="https://yushen7.github.io/2020/05/14/about-meta-viewport/"/>
     <id>https://yushen7.github.io/2020/05/14/about-meta-viewport/</id>
     <published>2020-05-14T01:33:11.000Z</published>
-    <updated>2020-05-13T19:20:58.943Z</updated>
+    <updated>2020-05-15T09:34:36.300Z</updated>
     
     <summary type="html">
     
@@ -82,7 +144,7 @@
     <link href="https://yushen7.github.io/2020/05/11/about_line-height/"/>
     <id>https://yushen7.github.io/2020/05/11/about_line-height/</id>
     <published>2020-05-11T01:38:34.000Z</published>
-    <updated>2020-05-13T19:20:58.943Z</updated>
+    <updated>2020-05-15T09:34:36.304Z</updated>
     
     <summary type="html">
     
@@ -116,16 +178,20 @@
   </entry>
   
   <entry>
-    <title>prototype</title>
+    <title>原型与原型链</title>
     <link href="https://yushen7.github.io/2020/04/18/prototype/"/>
     <id>https://yushen7.github.io/2020/04/18/prototype/</id>
     <published>2020-04-18T17:21:20.000Z</published>
-    <updated>2020-05-13T19:20:58.947Z</updated>
+    <updated>2020-05-14T16:00:31.000Z</updated>
     
     <summary type="html">
     
       &lt;p&gt;本文是阅读你不知道的JS（上）-原型部分所做的笔记。&lt;/p&gt;
-&lt;h1 id=&quot;原型与原型链&quot;&gt;&lt;a href=&quot;#原型与原型链&quot; class=&quot;headerlink&quot; title=&quot;原型与原型链&quot;&gt;&lt;/a&gt;原型与原型链&lt;/h1&gt;&lt;ol&gt;
+&lt;h1 id=&quot;原型与原型链&quot;&gt;&lt;a href=&quot;#原型与原型链&quot; class=&quot;headerlink&quot; title=&quot;原型与原型链&quot;&gt;&lt;/a&gt;原型与原型链&lt;/h1&gt;&lt;p&gt;ECMA-262对于原型的定义（prototype）：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;object that provides shared properties for other objects&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
 &lt;li&gt;函数都有一个&lt;code&gt;prototype&lt;/code&gt;属性。&lt;/li&gt;
 &lt;li&gt;对象&lt;strong&gt;一般&lt;/strong&gt;都有一个&lt;code&gt;[[prototype]]&lt;/code&gt;属性，可以通过&lt;code&gt;[[prototype]]&lt;/code&gt;访问另一个对象，从而把对象和对象串联起来。&lt;/li&gt;
 &lt;li&gt;可通过new调用一个函数，使返回对象的&lt;code&gt;[[prototype]]&lt;/code&gt;和此函数的&lt;code&gt;prototype&lt;/code&gt;建立关联。&lt;/li&gt;
@@ -136,6 +202,8 @@
     
     
     
+      <category term="Javascript" scheme="https://yushen7.github.io/tags/Javascript/"/>
+    
   </entry>
   
   <entry>
@@ -143,7 +211,7 @@
     <link href="https://yushen7.github.io/2020/04/17/type-casting/"/>
     <id>https://yushen7.github.io/2020/04/17/type-casting/</id>
     <published>2020-04-17T14:37:46.000Z</published>
-    <updated>2020-05-13T19:20:58.947Z</updated>
+    <updated>2020-05-15T09:34:36.304Z</updated>
     
     <summary type="html">
     
@@ -162,7 +230,7 @@
     
     
     
-      <category term="JS" scheme="https://yushen7.github.io/tags/JS/"/>
+      <category term="Javascript" scheme="https://yushen7.github.io/tags/Javascript/"/>
     
   </entry>
   

@@ -159,6 +159,213 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://yushen7.github.io/2020/05/15/about-new-operator/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="name" content="Rain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rain's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2020/05/15/about-new-operator/" class="post-title-link" itemprop="url">认识new操作符</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-05-15 17:33:11 / Modified: 09:34:36" itemprop="dateCreated datePublished" datetime="2020-05-15T17:33:11+00:00">2020-05-15</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>1.5k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>1 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>看了<a href="https://github.com/mqyqingfeng/Blog" target="_blank" rel="noopener">冴羽的Javscript博客</a>，同样模拟一下<code>new</code>的功能实现</p>
+<h1 id="对于new操作符的认识"><a href="#对于new操作符的认识" class="headerlink" title="对于new操作符的认识"></a>对于new操作符的认识</h1><p>首先，是使用<code>new</code>的两种方式：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>) </span>&#123;<span class="keyword">this</span>.name = name&#125;;</span><br><span class="line"><span class="keyword">const</span> person1 = <span class="keyword">new</span> Person <span class="comment">// person1.name === undefined </span></span><br><span class="line"><span class="keyword">const</span> person2 = <span class="keyword">new</span> Person(<span class="string">'Siro'</span>); <span class="comment">// person2.name === 'Siro'</span></span><br></pre></td></tr></table></figure>
+
+<p>其次，简单看一下<code>new</code>的大致流程：</p>
+<p>执行<code>Construct(constructor, argList)</code>，这里如果<strong>没问题</strong>的话，最终会执行<code>constructor.[Construct]（argumentsList,newTarget）</code>，所以直接看最终的抽象操作：</p>
+<ol>
+<li><code>argumentsList</code>为参数列表（类数组），<code>newTarget</code>最开始没有指定的话就是<code>constructor</code>。</li>
+<li>赋<code>callerContext</code>为<code>running execution context</code>（当前运行的执行上下文）。</li>
+<li>赋<code>kind</code>为<code>F.[[ConstructorKind]]</code>。<code>F</code>为<code>constructor</code>；<code>F.[[ConstructorKind]]</code>的可能取值为：<code>base</code>或<code>derived</code>。一般定义函数的时候，这个<code>ConstructorKind</code>都为<code>base</code>。</li>
+<li>如果<code>kind</code>为<code>base</code>，则<ol>
+<li>赋<code>thisArgument</code>为一个<code>[[Prototype]]</code>指向<code>Constructor.prototype</code>的<strong>新对象</strong>。</li>
+</ol>
+</li>
+<li>赋<code>calleeContext</code> 为当前执行上下文栈的顶部执行上下文。这一步相当于创建了执行上下文环境等预置工作。</li>
+<li>把<code>thisArgument</code>绑定到当前的上下文环境中。</li>
+<li>…词法环境、函数作用域的构建…</li>
+<li>执行函数<code>constructor</code>，结束后，从执行上下文栈中移除<code>calleeContext</code>。判断<code>constructor</code>返回值是否为对象，如果返回值是对象，则利用这个对象作为返回值，否则使用<code>thisArgument</code>作为返回值。</li>
+</ol>
+<p>简单说就是：</p>
+<ol>
+<li><p>函数调用 + <code>this</code>的生成。</p>
+</li>
+<li><p>相比于函数调用，在函数返回值的时候也做了<code>this</code>的相应处理。</p>
+</li>
+<li><p><code>this</code>是一个<code>[[Prototype]]</code>指向<code>Constructor.prorotype</code>的<strong>新对象</strong>。</p>
+</li>
+</ol>
+<h1 id="模拟new的实现"><a href="#模拟new的实现" class="headerlink" title="模拟new的实现"></a>模拟new的实现</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myNew</span>(<span class="params">fn, ...arguments</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">typeof</span> fn !== <span class="string">'function'</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="built_in">Error</span>(<span class="string">'fn is not a function and can\'t not be a constructor.'</span>);</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> thisArgument = <span class="built_in">Object</span>.create(fn.prototype); </span><br><span class="line">    <span class="keyword">const</span> result = fn.call(thisArgument, ...arguments);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(result &amp;&amp; (<span class="keyword">typeof</span> result === <span class="string">'object'</span> || <span class="keyword">typeof</span> result === <span class="string">'function'</span>)) &#123;</span><br><span class="line">       <span class="keyword">return</span> result;</span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">       <span class="keyword">return</span> thisArgument;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在创建<code>thisArgument</code>创建对象的时候，有一个巨大的坑，如果用：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> thisArgument = <span class="built_in">Object</span>.create(<span class="literal">null</span>);  <span class="comment">//空对象</span></span><br><span class="line">thisArgument.__proto__ = fn.prototype;</span><br></pre></td></tr></table></figure>
+
+<p>这样做是无法关联<code>thisArgument</code>和<code>fn.prototype</code>的，由于空对象不具有原型，也不具有<code>constructor</code>，所以设置<code>__proto__</code>相当于单纯的设置属性，而不是在设置它的原型！</p>
+<p>空对象只要用来存储数据就行了！</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://yushen7.github.io/2020/05/15/operate-object/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="name" content="Rain">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rain's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/blog/2020/05/15/operate-object/" class="post-title-link" itemprop="url">JS中的对象</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-05-15 13:27:17 / Modified: 09:34:36" itemprop="dateCreated datePublished" datetime="2020-05-15T13:27:17+00:00">2020-05-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Front-end/" itemprop="url" rel="index"><span itemprop="name">Front-end</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>6.5k</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>6 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>此文为关于JS中对象的笔记。</p>
+<p>ECMA-26对于对象的定义：</p>
+<blockquote>
+<p>In ECMAScript, the state and methods are carried by objects, while<br>structure, behaviour, and state are all inherited.</p>
+</blockquote>
+<p>高程（中文版）：“无序属性的集合，其属性可以包含基本值、对象或者函数。”</p>
+<p>简而言之，在Ecmascript中：<strong>对象是键值对（key-value）的集合</strong>。</p>
+<h1 id="对象属性的特性-attribute"><a href="#对象属性的特性-attribute" class="headerlink" title="对象属性的特性(attribute)"></a>对象属性的特性(attribute)</h1><p>对象的属性有两种：</p>
+<ol>
+<li>数据属性。</li>
+<li>访问器属性。通过getter和setter取值和赋值。</li>
+</ol>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/blog/2020/05/15/operate-object/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://yushen7.github.io/2020/05/14/about-meta-viewport/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -190,7 +397,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-13 19:20:58" itemprop="dateModified" datetime="2020-05-13T19:20:58+00:00">2020-05-13</time>
+                <time title="Modified: 2020-05-15 09:34:36" itemprop="dateModified" datetime="2020-05-15T09:34:36+00:00">2020-05-15</time>
               </span>
 
           <br>
@@ -318,7 +525,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-13 19:20:58" itemprop="dateModified" datetime="2020-05-13T19:20:58+00:00">2020-05-13</time>
+                <time title="Modified: 2020-05-15 09:34:36" itemprop="dateModified" datetime="2020-05-15T09:34:36+00:00">2020-05-15</time>
               </span>
 
           <br>
@@ -406,7 +613,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/blog/2020/04/18/prototype/" class="post-title-link" itemprop="url">prototype</a>
+            <a href="/blog/2020/04/18/prototype/" class="post-title-link" itemprop="url">原型与原型链</a>
         </h2>
 
         <div class="post-meta">
@@ -423,7 +630,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-13 19:20:58" itemprop="dateModified" datetime="2020-05-13T19:20:58+00:00">2020-05-13</time>
+                <time title="Modified: 2020-05-14 16:00:31" itemprop="dateModified" datetime="2020-05-14T16:00:31+00:00">2020-05-14</time>
               </span>
 
           <br>
@@ -432,7 +639,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>4.7k</span>
+              <span>4.8k</span>
             </span>
             <span class="post-meta-item" title="Reading time">
               <span class="post-meta-item-icon">
@@ -452,7 +659,11 @@
 
       
           <p>本文是阅读你不知道的JS（上）-原型部分所做的笔记。</p>
-<h1 id="原型与原型链"><a href="#原型与原型链" class="headerlink" title="原型与原型链"></a>原型与原型链</h1><ol>
+<h1 id="原型与原型链"><a href="#原型与原型链" class="headerlink" title="原型与原型链"></a>原型与原型链</h1><p>ECMA-262对于原型的定义（prototype）：</p>
+<blockquote>
+<p>object that provides shared properties for other objects</p>
+</blockquote>
+<ol>
 <li>函数都有一个<code>prototype</code>属性。</li>
 <li>对象<strong>一般</strong>都有一个<code>[[prototype]]</code>属性，可以通过<code>[[prototype]]</code>访问另一个对象，从而把对象和对象串联起来。</li>
 <li>可通过new调用一个函数，使返回对象的<code>[[prototype]]</code>和此函数的<code>prototype</code>建立关联。</li>
@@ -515,7 +726,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-13 19:20:58" itemprop="dateModified" datetime="2020-05-13T19:20:58+00:00">2020-05-13</time>
+                <time title="Modified: 2020-05-15 09:34:36" itemprop="dateModified" datetime="2020-05-15T09:34:36+00:00">2020-05-15</time>
               </span>
 
           <br>
@@ -641,12 +852,16 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog/archives/">
         
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -683,13 +898,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">14k</span>
+    <span title="Symbols count total">22k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">12 mins.</span>
+    <span title="Reading time total">20 mins.</span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
   </div>
