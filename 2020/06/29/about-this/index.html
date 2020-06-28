@@ -20,28 +20,37 @@
     var CONFIG = {"hostname":"yushen7.github.io","root":"/blog/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Rain&#39;s blog">
-<meta property="og:url" content="https://yushen7.github.io/index.html">
+  <meta name="description" content="看了冴羽的文章“JavaScript深入之从ECMAScript规范解读this”，决定读一读this的规范定义，梳理一下this。 this存在的场景this存在的场景肯定是函数执行的时候，那么有以下几种调用函数的方式：  直接调用：foo()，foo中this的值将会是window或undeifined，取决于是否是严格模式。 作为对象的方法调用：obj.foo()，this的值将是obj。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="about-this">
+<meta property="og:url" content="https://yushen7.github.io/2020/06/29/about-this/index.html">
 <meta property="og:site_name" content="Rain&#39;s blog">
+<meta property="og:description" content="看了冴羽的文章“JavaScript深入之从ECMAScript规范解读this”，决定读一读this的规范定义，梳理一下this。 this存在的场景this存在的场景肯定是函数执行的时候，那么有以下几种调用函数的方式：  直接调用：foo()，foo中this的值将会是window或undeifined，取决于是否是严格模式。 作为对象的方法调用：obj.foo()，this的值将是obj。">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://yushen7.github.io/blog/2020/06/29/about-this/create-this-wrapup-workflow.jpg">
+<meta property="article:published_time" content="2020-06-29T00:53:25.000Z">
+<meta property="article:modified_time" content="2020-06-28T17:25:26.744Z">
 <meta property="article:author" content="Rain">
+<meta property="article:tag" content="Javascript">
+<meta property="article:tag" content="function">
+<meta property="article:tag" content="this">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yushen7.github.io/blog/2020/06/29/about-this/create-this-wrapup-workflow.jpg">
 
-<link rel="canonical" href="https://yushen7.github.io/">
+<link rel="canonical" href="https://yushen7.github.io/2020/06/29/about-this/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>Rain's blog</title>
+  <title>about-this | Rain's blog</title>
   
 
 
@@ -153,9 +162,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
@@ -171,10 +181,9 @@
       <meta itemprop="name" content="Rain's blog">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2020/06/29/about-this/" class="post-title-link" itemprop="url">about-this</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          about-this
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -202,7 +211,14 @@
                 </span>
             </span>
 
-          <br>
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
             <span class="post-meta-item" title="Symbols count in article">
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
@@ -227,7 +243,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>看了冴羽的文章<a href="https://github.com/mqyqingfeng/Blog/issues/7" target="_blank" rel="noopener">“JavaScript深入之从ECMAScript规范解读this”</a>，决定读一读<code>this</code>的规范定义，梳理一下this。</p>
+        <p>看了冴羽的文章<a href="https://github.com/mqyqingfeng/Blog/issues/7" target="_blank" rel="noopener">“JavaScript深入之从ECMAScript规范解读this”</a>，决定读一读<code>this</code>的规范定义，梳理一下this。</p>
 <h1 id="this存在的场景"><a href="#this存在的场景" class="headerlink" title="this存在的场景"></a>this存在的场景</h1><p><code>this</code>存在的场景肯定是<strong>函数执行</strong>的时候，那么有以下几种调用函数的方式：</p>
 <ol>
 <li>直接调用：<code>foo()</code>，<code>foo</code>中<code>this</code>的值将会是<code>window</code>或<code>undeifined</code>，取决于是否是严格模式。</li>
@@ -506,664 +522,36 @@ Property Descriptor, Lexical Environment, Environment Record,</code>和<code>Dat
 <li>ECMA-262 edition 10th </li>
 </ol>
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://yushen7.github.io/2020/05/15/about-new-operator/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.gif">
-      <meta itemprop="name" content="Rain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rain's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
           
-            <a href="/blog/2020/05/15/about-new-operator/" class="post-title-link" itemprop="url">认识new操作符</a>
-        </h2>
+          <div class="post-tags">
+              <a href="/blog/tags/Javascript/" rel="tag"><i class="fa fa-tag"></i> Javascript</a>
+              <a href="/blog/tags/function/" rel="tag"><i class="fa fa-tag"></i> function</a>
+              <a href="/blog/tags/this/" rel="tag"><i class="fa fa-tag"></i> this</a>
+          </div>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-05-15 17:33:11" itemprop="dateCreated datePublished" datetime="2020-05-15T17:33:11+00:00">2020-05-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-28 17:25:26" itemprop="dateModified" datetime="2020-06-28T17:25:26+00:00">2020-06-28</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>1.5k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>1 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>看了<a href="https://github.com/mqyqingfeng/Blog" target="_blank" rel="noopener">冴羽的Javscript博客</a>，同样模拟一下<code>new</code>的功能实现</p>
-<h1 id="对于new操作符的认识"><a href="#对于new操作符的认识" class="headerlink" title="对于new操作符的认识"></a>对于new操作符的认识</h1><p>首先，是使用<code>new</code>的两种方式：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>) </span>&#123;<span class="keyword">this</span>.name = name&#125;;</span><br><span class="line"><span class="keyword">const</span> person1 = <span class="keyword">new</span> Person <span class="comment">// person1.name === undefined </span></span><br><span class="line"><span class="keyword">const</span> person2 = <span class="keyword">new</span> Person(<span class="string">'Siro'</span>); <span class="comment">// person2.name === 'Siro'</span></span><br></pre></td></tr></table></figure>
-
-<p>其次，简单看一下<code>new</code>的大致流程：</p>
-<p>执行<code>Construct(constructor, argList)</code>，这里如果<strong>没问题</strong>的话，最终会执行<code>constructor.[Construct]（argumentsList,newTarget）</code>，所以直接看最终的抽象操作：</p>
-<ol>
-<li><code>argumentsList</code>为参数列表（类数组），<code>newTarget</code>最开始没有指定的话就是<code>constructor</code>。</li>
-<li>赋<code>callerContext</code>为<code>running execution context</code>（当前运行的执行上下文）。</li>
-<li>赋<code>kind</code>为<code>F.[[ConstructorKind]]</code>。<code>F</code>为<code>constructor</code>；<code>F.[[ConstructorKind]]</code>的可能取值为：<code>base</code>或<code>derived</code>。一般定义函数的时候，这个<code>ConstructorKind</code>都为<code>base</code>。</li>
-<li>如果<code>kind</code>为<code>base</code>，则<ol>
-<li>赋<code>thisArgument</code>为一个<code>[[Prototype]]</code>指向<code>Constructor.prototype</code>的<strong>新对象</strong>。</li>
-</ol>
-</li>
-<li>赋<code>calleeContext</code> 为当前执行上下文栈的顶部执行上下文。这一步相当于创建了执行上下文环境等预置工作。</li>
-<li>把<code>thisArgument</code>绑定到当前的上下文环境中。</li>
-<li>…词法环境、函数作用域的构建…</li>
-<li>执行函数<code>constructor</code>，结束后，从执行上下文栈中移除<code>calleeContext</code>。判断<code>constructor</code>返回值是否为对象，如果返回值是对象，则利用这个对象作为返回值，否则使用<code>thisArgument</code>作为返回值。</li>
-</ol>
-<p>简单说就是：</p>
-<ol>
-<li><p>函数调用 + <code>this</code>的生成。</p>
-</li>
-<li><p>相比于函数调用，在函数返回值的时候也做了<code>this</code>的相应处理。</p>
-</li>
-<li><p><code>this</code>是一个<code>[[Prototype]]</code>指向<code>Constructor.prorotype</code>的<strong>新对象</strong>。</p>
-</li>
-</ol>
-<h1 id="模拟new的实现"><a href="#模拟new的实现" class="headerlink" title="模拟new的实现"></a>模拟new的实现</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myNew</span>(<span class="params">fn, ...arguments</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">typeof</span> fn !== <span class="string">'function'</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="built_in">Error</span>(<span class="string">'fn is not a function and can\'t not be a constructor.'</span>);</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> thisArgument = <span class="built_in">Object</span>.create(fn.prototype); </span><br><span class="line">    <span class="keyword">const</span> result = fn.call(thisArgument, ...arguments);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(result &amp;&amp; (<span class="keyword">typeof</span> result === <span class="string">'object'</span> || <span class="keyword">typeof</span> result === <span class="string">'function'</span>)) &#123;</span><br><span class="line">       <span class="keyword">return</span> result;</span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">       <span class="keyword">return</span> thisArgument;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在创建<code>thisArgument</code>创建对象的时候，有一个巨大的坑，如果用：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> thisArgument = <span class="built_in">Object</span>.create(<span class="literal">null</span>);  <span class="comment">//空对象</span></span><br><span class="line">thisArgument.__proto__ = fn.prototype;</span><br></pre></td></tr></table></figure>
-
-<p>这样做是无法关联<code>thisArgument</code>和<code>fn.prototype</code>的，由于空对象不具有原型，也不具有<code>constructor</code>，所以设置<code>__proto__</code>相当于单纯的设置属性，而不是在设置它的原型！</p>
-<p>空对象只要用来存储数据就行了！</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://yushen7.github.io/2020/05/15/operate-object/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.gif">
-      <meta itemprop="name" content="Rain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rain's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2020/05/15/operate-object/" class="post-title-link" itemprop="url">JS中的对象</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-05-15 13:27:17" itemprop="dateCreated datePublished" datetime="2020-05-15T13:27:17+00:00">2020-05-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-28 17:25:26" itemprop="dateModified" datetime="2020-06-28T17:25:26+00:00">2020-06-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/Front-end/" itemprop="url" rel="index"><span itemprop="name">Front-end</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>6.5k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>6 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>此文为关于JS中对象的笔记。</p>
-<p>ECMA-26对于对象的定义：</p>
-<blockquote>
-<p>In ECMAScript, the state and methods are carried by objects, while<br>structure, behaviour, and state are all inherited.</p>
-</blockquote>
-<p>高程（中文版）：“无序属性的集合，其属性可以包含基本值、对象或者函数。”</p>
-<p>简而言之，在Ecmascript中：<strong>对象是键值对（key-value）的集合</strong>。</p>
-<h1 id="对象属性的特性-attribute"><a href="#对象属性的特性-attribute" class="headerlink" title="对象属性的特性(attribute)"></a>对象属性的特性(attribute)</h1><p>对象的属性有两种：</p>
-<ol>
-<li>数据属性。</li>
-<li>访问器属性。通过getter和setter取值和赋值。</li>
-</ol>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/blog/2020/05/15/operate-object/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
-    </div>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://yushen7.github.io/2020/05/14/about-meta-viewport/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.gif">
-      <meta itemprop="name" content="Rain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rain's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2020/05/14/about-meta-viewport/" class="post-title-link" itemprop="url">meta中的viewport</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-05-14 01:33:11" itemprop="dateCreated datePublished" datetime="2020-05-14T01:33:11+00:00">2020-05-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-28 17:25:26" itemprop="dateModified" datetime="2020-06-28T17:25:26+00:00">2020-06-28</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>2.5k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>2 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>很久很久以前，在适配移动端的时候，第一次听到viewport这个概念。</p>
-<p>只知道一股脑儿复制：</p>
-<blockquote>
-<meta name="viewport" content="initial-scale=1.0, width=device-width, user-scalable=no, maximum-scale=1.0">
-</blockquote>
-<p>当时不知道是什么意思，查了几篇文章后未果。</p>
-<p>近期好好读了远古时期介绍viewport的博客，准备对这个概念做一个梳理。</p>
-<p>博客文章地址：<a href="https://quirksmode.org/mobile/viewports.html" target="_blank" rel="noopener">A tale of two viewports — 1</a></p>
-<p>没有找出关于<code>viewport</code>的标准定义，以下内容是结合了该博客viewport概念系列的一家之见。</p>
-<h1 id="meta中的viewport"><a href="#meta中的viewport" class="headerlink" title="meta中的viewport"></a>meta中的viewport</h1><p>meta中的viewport有几个键值对，写在content里：</p>
-<ol>
-<li><code>initial-scale=n</code>：初始缩放值，<code>n</code>为一个数值。</li>
-<li><code>width=[device-width/n]</code>：宽度，值可以为<code>device-width</code>或<code>n</code>，<code>n</code>为CSS像素值。</li>
-<li><code>user-scalable=[yes/no]</code>：是否允许用户缩放。</li>
-<li><code>maximum-scale=n</code>：最大缩放值，<code>n</code>为一个数值。</li>
-</ol>
-<p>viewport可分为三种：</p>
-<ol>
-<li><code>layout viewport</code>，该概念与<code>html</code>元素的宽度相似，对应meta中的viewport。</li>
-<li><code>visual viewport</code>，对应可见的viewport，即可见视窗，能看见的范围。（虚拟概念）</li>
-<li><code>ideal viewport</code>，直译过来是：理想情况下的viewport。（虚拟概念）</li>
-</ol>
-<p>个人认为虚拟概念只是方便理解的，实际上不存在，归根结底还是对DOM的操作，以及可见范围（视窗）的缩放。</p>
-<p>为PC端开发的网页在移动端上显示的话，由于设备的尺寸原因，绝大多数移动端的浏览器按照桌面端的显示方式显示网页肯定显示不全，所以移动端增添了viewport这一概念，使得在移动端上也能单屏展示一个网页。</p>
-<p>如下图，同一个网页不设置viewport时，在桌面端和移动端上的显示效果：</p>
-<img src="/blog/2020/05/14/about-meta-viewport/pc.png" class="" title="pc端">
-
-<img src="/blog/2020/05/14/about-meta-viewport/mobile.png" class="" title="移动端">
-
-<p>可以看出一个明显的区别：<strong>移动端的网页明显被缩小了，</strong>且<code>document.documentElement.clientWidth</code>为<code>980px</code>，不同浏览器、手机的值都不一样，该值可以看成<code>layout viewport</code>的值。</p>
-<p>这种情况下，需要用户手动放大，才能完全看清楚内容，</p>
-<p>那么，如果我们想解决移动端缩小网页（或者说强行设置viewport）的问题的话，就可以使用meta中的viewport了。</p>
-<p>设置：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width:device-width,initial-scale=1.0"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>说明不对viewport进行缩放，该值可以认为是<code>ideal viewport</code>的值，可以从<code>screen.width</code>或<code>window.innerWidth</code>获得。</p>
-<p>简而言之，这就是<strong>移动端设备</strong>的物理像素宽度，这个设备有多大，就显示多大的区域。</p>
-<p>设置之后效果如下：</p>
-<img src="/blog/2020/05/14/about-meta-viewport/set_viewport_mobile.png" class="" title="After setting viewport">
-
-<p>这时候再获取一下<code>document.documentElement.clientWidth</code>就为<code>320px</code>了。</p>
-<p><strong>所以对viewport的设置实际上可以看作是改变了<code>document.documentElement.clientWidth</code>的值。</strong></p>
-<h2 id="总的来说"><a href="#总的来说" class="headerlink" title="总的来说"></a>总的来说</h2>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/blog/2020/05/14/about-meta-viewport/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/blog/2020/05/15/about-new-operator/" rel="prev" title="认识new操作符">
+      <i class="fa fa-chevron-left"></i> 认识new操作符
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://yushen7.github.io/2020/05/11/about_line-height/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.gif">
-      <meta itemprop="name" content="Rain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rain's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2020/05/11/about_line-height/" class="post-title-link" itemprop="url">补一补line-height</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-05-11 01:38:34" itemprop="dateCreated datePublished" datetime="2020-05-11T01:38:34+00:00">2020-05-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-28 17:25:26" itemprop="dateModified" datetime="2020-06-28T17:25:26+00:00">2020-06-28</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>2.6k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>2 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>补一补CSS基础，从line-height开始。</p>
-<h1 id="line-height到底指什么"><a href="#line-height到底指什么" class="headerlink" title="line-height到底指什么"></a>line-height到底指什么</h1><p>line-height可以粗略认为是：</p>
-<ol>
-<li>由行内级元素组成内容的块状元素的最小的高度。</li>
-<li>行内元素（non-replaced inline elements）中用来计算line-box的高度的值。</li>
-</ol>
-<p>line-box根据定义是：</p>
-<blockquote>
-<p>The rectangular area that contains the boxes that form a line is called a line box.</p>
-</blockquote>
-<p>包含着组成一行的框（boxes）的矩形区域。</p>
-<p>而这些框（boxes）则是行内级（inline-level elements）元素产生的，所以可以看成这个line-box里包含了许多的行内级元素，行内级元素即display属性为：</p>
-<ol>
-<li>inline</li>
-<li>inline-block</li>
-<li>inline-table</li>
-</ol>
-<p>的元素。</p>
-<p>需要详细说明，挖个坑。</p>
-<h1 id="line-height的值"><a href="#line-height的值" class="headerlink" title="line-height的值"></a>line-height的值</h1>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/blog/2020/05/11/about_line-height/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://yushen7.github.io/2020/04/18/prototype/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.gif">
-      <meta itemprop="name" content="Rain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rain's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2020/04/18/prototype/" class="post-title-link" itemprop="url">原型与原型链</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-04-18 17:21:20" itemprop="dateCreated datePublished" datetime="2020-04-18T17:21:20+00:00">2020-04-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-14 16:00:31" itemprop="dateModified" datetime="2020-05-14T16:00:31+00:00">2020-05-14</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>4.8k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>4 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>本文是阅读你不知道的JS（上）-原型部分所做的笔记。</p>
-<h1 id="原型与原型链"><a href="#原型与原型链" class="headerlink" title="原型与原型链"></a>原型与原型链</h1><p>ECMA-262对于原型的定义（prototype）：</p>
-<blockquote>
-<p>object that provides shared properties for other objects</p>
-</blockquote>
-<ol>
-<li>函数都有一个<code>prototype</code>属性。</li>
-<li>对象<strong>一般</strong>都有一个<code>[[prototype]]</code>属性，可以通过<code>[[prototype]]</code>访问另一个对象，从而把对象和对象串联起来。</li>
-<li>可通过new调用一个函数，使返回对象的<code>[[prototype]]</code>和此函数的<code>prototype</code>建立关联。</li>
-<li>访问一个对象的属性/方法时，若未在此对象上找到对应的属性/方法，将会沿着原型链一直往上查找，即通过<code>[[prototype]]</code>查找，直到查找到对应的属性/方法；反之最后会查找到<code>null</code>，返回<code>undefined</code>。</li>
-</ol>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/blog/2020/04/18/prototype/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://yushen7.github.io/2020/04/17/type-casting/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/avatar.gif">
-      <meta itemprop="name" content="Rain">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rain's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/blog/2020/04/17/type-casting/" class="post-title-link" itemprop="url">Type Casting</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-04-17 14:37:46" itemprop="dateCreated datePublished" datetime="2020-04-17T14:37:46+00:00">2020-04-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-28 17:25:26" itemprop="dateModified" datetime="2020-06-28T17:25:26+00:00">2020-06-28</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="Symbols count in article">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              <span>3.8k</span>
-            </span>
-            <span class="post-meta-item" title="Reading time">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              <span>3 mins.</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>简单总结一下JS中的部分显/隐式强制类型转换。</p>
-<h1 id="1、类型"><a href="#1、类型" class="headerlink" title="1、类型"></a>1、类型</h1><p>JS中6种基本类型：</p>
-<blockquote>
-<p>Undefined, Null, Boolean, Number, Symbol, or String</p>
-</blockquote>
-<p>以及对象：</p>
-<blockquote>
-<p>member of the type Object</p>
-</blockquote>
-<h2 id="Boolean的真假值"><a href="#Boolean的真假值" class="headerlink" title="Boolean的真假值"></a>Boolean的真假值</h2>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/blog/2020/04/17/type-casting/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
   
 
 
@@ -1216,6 +604,7 @@ Property Descriptor, Lexical Environment, Environment Record,</code>和<code>Dat
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#this存在的场景"><span class="nav-number">1.</span> <span class="nav-text">this存在的场景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#函数被调用时的this"><span class="nav-number">2.</span> <span class="nav-text">函数被调用时的this</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CallExpression"><span class="nav-number">2.1.</span> <span class="nav-text">CallExpression</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Type"><span class="nav-number">2.2.</span> <span class="nav-text">Type</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GetValue"><span class="nav-number">2.3.</span> <span class="nav-text">GetValue</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#确定this"><span class="nav-number">2.4.</span> <span class="nav-text">确定this</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#示例1：foo-bar"><span class="nav-number">2.4.1.</span> <span class="nav-text">示例1：foo.bar</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例2：-foo-bar"><span class="nav-number">2.4.2.</span> <span class="nav-text">示例2：(foo.bar)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例3：-foo-bar-foo-bar"><span class="nav-number">2.4.3.</span> <span class="nav-text">示例3：(foo.bar &#x3D; foo.bar)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例4：-false-foo-bar"><span class="nav-number">2.4.4.</span> <span class="nav-text">示例4：(false || foo.bar)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#示例5：-foo-bar-foo-bar"><span class="nav-number">2.4.5.</span> <span class="nav-text">示例5：(foo.bar, foo.bar)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

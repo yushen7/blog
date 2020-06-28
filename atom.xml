@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://yushen7.github.io/"/>
-  <updated>2020-05-15T09:34:36.304Z</updated>
+  <updated>2020-06-28T17:25:26.744Z</updated>
   <id>https://yushen7.github.io/</id>
   
   <author>
@@ -17,11 +17,42 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>about-this</title>
+    <link href="https://yushen7.github.io/2020/06/29/about-this/"/>
+    <id>https://yushen7.github.io/2020/06/29/about-this/</id>
+    <published>2020-06-29T00:53:25.000Z</published>
+    <updated>2020-06-28T17:25:26.744Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;看了冴羽的文章&lt;a href=&quot;https://github.com/mqyqingfeng/Blog/issues/7&quot; target=&quot;_blank&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Javascript" scheme="https://yushen7.github.io/categories/Javascript/"/>
+    
+    
+      <category term="Javascript" scheme="https://yushen7.github.io/tags/Javascript/"/>
+    
+      <category term="function" scheme="https://yushen7.github.io/tags/function/"/>
+    
+      <category term="this" scheme="https://yushen7.github.io/tags/this/"/>
+    
+  </entry>
+  
+  <entry>
     <title>认识new操作符</title>
     <link href="https://yushen7.github.io/2020/05/15/about-new-operator/"/>
     <id>https://yushen7.github.io/2020/05/15/about-new-operator/</id>
     <published>2020-05-15T17:33:11.000Z</published>
-    <updated>2020-05-15T09:34:36.304Z</updated>
+    <updated>2020-06-28T17:25:26.744Z</updated>
     
     <summary type="html">
     
@@ -49,7 +80,7 @@
     <link href="https://yushen7.github.io/2020/05/15/operate-object/"/>
     <id>https://yushen7.github.io/2020/05/15/operate-object/</id>
     <published>2020-05-15T13:27:17.000Z</published>
-    <updated>2020-05-15T09:34:36.304Z</updated>
+    <updated>2020-06-28T17:25:26.748Z</updated>
     
     <summary type="html">
     
@@ -83,7 +114,7 @@
     <link href="https://yushen7.github.io/2020/05/14/about-meta-viewport/"/>
     <id>https://yushen7.github.io/2020/05/14/about-meta-viewport/</id>
     <published>2020-05-14T01:33:11.000Z</published>
-    <updated>2020-05-15T09:34:36.300Z</updated>
+    <updated>2020-06-28T17:25:26.744Z</updated>
     
     <summary type="html">
     
@@ -144,7 +175,7 @@
     <link href="https://yushen7.github.io/2020/05/11/about_line-height/"/>
     <id>https://yushen7.github.io/2020/05/11/about_line-height/</id>
     <published>2020-05-11T01:38:34.000Z</published>
-    <updated>2020-05-15T09:34:36.304Z</updated>
+    <updated>2020-06-28T17:25:26.748Z</updated>
     
     <summary type="html">
     
@@ -211,7 +242,7 @@
     <link href="https://yushen7.github.io/2020/04/17/type-casting/"/>
     <id>https://yushen7.github.io/2020/04/17/type-casting/</id>
     <published>2020-04-17T14:37:46.000Z</published>
-    <updated>2020-05-15T09:34:36.304Z</updated>
+    <updated>2020-06-28T17:25:26.748Z</updated>
     
     <summary type="html">
     
