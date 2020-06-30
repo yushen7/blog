@@ -357,7 +357,7 @@ codeblock:
   highlight_theme: normal
   # Add copy button on codeblock
   copy_button:
-    enable: false
+    enable: true
     # Show text copy result.
     show_result: false
     # Available values: default | flat | mac
@@ -676,7 +676,7 @@ google_analytics:
   only_pageview: false
 
 # Baidu Analytics
-baidu_analytics: # <app_id>
+baidu_analytics: ffe3032e0ff6ecb501d6d9d90a5bd47f # <app_id>
 
 # Growingio Analytics
 growingio_analytics: # <project_id>
