@@ -98,7 +98,7 @@ creative_commons:
 
 # Schemes
 #scheme: Muse
-scheme: Mist
+# scheme: Mist
 #scheme: Pisces
 #scheme: Gemini
 
@@ -115,15 +115,6 @@ darkmode: false
 # Value before `||` delimiter is the target link, value after `||` delimiter is the name of Font Awesome icon.
 # When running the site in a subdirectory (e.g. yoursite.com/blog), remove the leading slash from link value (/archives -> archives).
 # External url should start with http:// or https://
-menu:
-  home: / || fa fa-home
-  #about: /about/ || fa fa-user
-  tags: /tags/ || fa fa-tags
-  categories: /categories/ || fa fa-th
-  archives: /archives/ || fa fa-archive
-  #schedule: /schedule/ || fa fa-calendar
-  #sitemap: /sitemap.xml || fa fa-sitemap
-  commonweal: /404/ || fa fa-heartbeat
 
 # Enable / Disable menu icons / item badges.
 menu_settings:
@@ -196,12 +187,12 @@ social_icons:
 # Blog rolls
 links_settings:
   icon: fa fa-link
-  title: Links
+  title: 友情链接
   # Available values: block | inline
   layout: block
 
 links:
-  #Title: http://yoursite.com
+  ZZZJX0912: https://zzzjx0912.github.io
 
 # Table of Contents in the Sidebar
 # Front-matter variable (unsupport wrap expand_all).
@@ -239,13 +230,13 @@ excerpt_description: true
 read_more_btn: true
 
 # Post meta display settings
-post_meta:
-  item_text: true
-  created_at: true
-  updated_at:
-    enable: true
-    another_day: true
-  categories: true
+# post_meta:
+#   item_text: true
+#   created_at: true
+#   updated_at:
+#     enable: true
+#     another_day: true
+#   categories: true
 
 # Post wordcount display settings
 # Dependencies: https://github.com/theme-next/hexo-symbols-count-time
