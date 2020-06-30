@@ -22,7 +22,7 @@ categories: 笔记
 博客文章地址：[A tale of two viewports — 1](https://quirksmode.org/mobile/viewports.html)
 
 没有找出关于`viewport`的标准定义，以下内容是结合了该博客viewport概念系列的一家之见。
-
+<!-- more -->
 # meta中的viewport
 
 meta中的viewport有几个键值对，写在content里：

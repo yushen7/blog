@@ -22,7 +22,7 @@ const person2 = new Person('Siro'); // person2.name === 'Siro'
 ```
 
 其次，简单看一下`new`的大致流程：
-
+<!-- more -->
 执行`Construct(constructor, argList)`，这里如果**没问题**的话，最终会执行`constructor.[Construct]（argumentsList,newTarget）`，所以直接看最终的抽象操作：
 
 1. `argumentsList`为参数列表（类数组），`newTarget`最开始没有指定的话就是`constructor`。
@@ -38,7 +38,6 @@ const person2 = new Person('Siro'); // person2.name === 'Siro'
 简单说就是：
 
 1. 函数调用 + `this`的生成。
-
 2. 相比于函数调用，在函数返回值的时候也做了`this`的相应处理。
 3. `this`是一个`[[Prototype]]`指向`Constructor.prorotype`的**新对象**。
 

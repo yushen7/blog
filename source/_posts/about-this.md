@@ -1,5 +1,5 @@
 ---
-title: about-this
+title: JS中的this
 tags:
   - Javascript
 categories: 笔记
@@ -20,7 +20,7 @@ updated:
 4. 通过`apply`、`call`、`bind`调用：`this`的值将被绑定为指定值。
 
 然而，有特殊情况的存在：
-
+<!-- more -->
 > ```js
 > var value = 1;
 > 
