@@ -1,8 +1,9 @@
 ---
 title: 原型与原型链
 date: 2020-04-18 17:21:20
-tags: Javascript
 updated: 2020-05-14 16:00:31
+tags: Javascript
+categories: 笔记
 ---
 本文是阅读你不知道的JS（上）-原型部分所做的笔记。
 

@@ -2,10 +2,9 @@
 title: 认识new操作符
 tags:
   - Javascript
-  - Operator
 date: 2020-05-15 17:33:11
 updated:
-categories:
+categories: 笔记
 ---
 
 

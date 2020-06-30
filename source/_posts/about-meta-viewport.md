@@ -1,7 +1,11 @@
 ---
-title: meta中的viewport
-tags: Front-end
+title: meta标签中的viewport
+tags: 
+  - HTML
+  - FE
+  - viewport
 date: 2020-05-14 01:33:11
+categories: 笔记
 ---
 
 

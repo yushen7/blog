@@ -3,7 +3,7 @@ title: JS中的类型转换
 tags: Javascript
 date: 2020-04-30 16:27:17
 updated: 2020-06-30 16:27:17
-categories: Javascript
+categories: 笔记
 ---
 
 

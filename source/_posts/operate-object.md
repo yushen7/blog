@@ -2,9 +2,8 @@
 title: JS中的对象
 tags:
   - Javascript
-  - Object
 categories:
-  - Front-end
+  - 笔记
 date: 2020-05-15 13:27:17
 updated:
 ---

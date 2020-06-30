@@ -2,9 +2,7 @@
 title: about-this
 tags:
   - Javascript
-  - function
-  - this
-categories: Javascript
+categories: 笔记
 date: 2020-06-29 00:53:25
 updated:
 ---
