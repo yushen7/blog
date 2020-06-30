@@ -1,37 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Rain&#39;s blog</title>
+  <title>yoxious&#39;s blog</title>
   <icon>https://yushen7.github.io/icon.png</icon>
   
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://yushen7.github.io/"/>
-  <updated>2020-06-30T09:05:43.819Z</updated>
+  <updated>2020-06-30T09:14:06.627Z</updated>
   <id>https://yushen7.github.io/</id>
   
   <author>
-    <name>Rain</name>
+    <name>yoxious</name>
     
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>about-this</title>
+    <title>JS中的this</title>
     <link href="https://yushen7.github.io/2020/06/29/about-this/"/>
     <id>https://yushen7.github.io/2020/06/29/about-this/</id>
     <published>2020-06-29T00:53:25.000Z</published>
-    <updated>2020-06-30T09:05:43.819Z</updated>
+    <updated>2020-06-30T09:14:06.627Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;p&gt;看了冴羽的文章&lt;a href=&quot;https://github.com/mqyqingfeng/Blog/issues/7&quot; target=&quot;_blank&quot;
-        
-      
+      &lt;p&gt;看了冴羽的文章&lt;a href=&quot;https://github.com/mqyqingfeng/Blog/issues/7&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;“JavaScript深入之从ECMAScript规范解读this”&lt;/a&gt;，决定读一读&lt;code&gt;this&lt;/code&gt;的规范定义，梳理一下this。&lt;/p&gt;
+&lt;h1 id=&quot;this存在的场景&quot;&gt;&lt;a href=&quot;#this存在的场景&quot; class=&quot;headerlink&quot; title=&quot;this存在的场景&quot;&gt;&lt;/a&gt;this存在的场景&lt;/h1&gt;&lt;p&gt;&lt;code&gt;this&lt;/code&gt;存在的场景肯定是&lt;strong&gt;函数执行&lt;/strong&gt;的时候，那么有以下几种调用函数的方式：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;直接调用：&lt;code&gt;foo()&lt;/code&gt;，&lt;code&gt;foo&lt;/code&gt;中&lt;code&gt;this&lt;/code&gt;的值将会是&lt;code&gt;window&lt;/code&gt;或&lt;code&gt;undeifined&lt;/code&gt;，取决于是否是严格模式。&lt;/li&gt;
+&lt;li&gt;作为对象的方法调用：&lt;code&gt;obj.foo()&lt;/code&gt;，&lt;code&gt;this&lt;/code&gt;的值将是&lt;code&gt;obj&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;作为&lt;code&gt;new&lt;/code&gt;操作符的一部分调用：&lt;code&gt;new foo()&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;通过&lt;code&gt;apply&lt;/code&gt;、&lt;code&gt;call&lt;/code&gt;、&lt;code&gt;bind&lt;/code&gt;调用：&lt;code&gt;this&lt;/code&gt;的值将被绑定为指定值。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;然而，有特殊情况的存在：&lt;/p&gt;
     
     </summary>
     
@@ -48,18 +50,15 @@
     <link href="https://yushen7.github.io/2020/05/15/about-new-operator/"/>
     <id>https://yushen7.github.io/2020/05/15/about-new-operator/</id>
     <published>2020-05-15T17:33:11.000Z</published>
-    <updated>2020-06-30T09:05:43.819Z</updated>
+    <updated>2020-06-30T09:14:06.627Z</updated>
     
     <summary type="html">
     
-      
-      
-        
-        
-          &lt;p&gt;看了&lt;a href=&quot;https://github.com/mqyqingfeng/Blog&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;冴羽的Javscript博客&lt;/a&gt;，同样模拟一下&lt;code&gt;new&lt;/code&gt;的功能实现&lt;/p&gt;
-&lt;h1
-        
-      
+      &lt;p&gt;看了&lt;a href=&quot;https://github.com/mqyqingfeng/Blog&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;冴羽的Javscript博客&lt;/a&gt;，同样模拟一下&lt;code&gt;new&lt;/code&gt;的功能实现&lt;/p&gt;
+&lt;h1 id=&quot;对于new操作符的认识&quot;&gt;&lt;a href=&quot;#对于new操作符的认识&quot; class=&quot;headerlink&quot; title=&quot;对于new操作符的认识&quot;&gt;&lt;/a&gt;对于new操作符的认识&lt;/h1&gt;&lt;p&gt;首先，是使用&lt;code&gt;new&lt;/code&gt;的两种方式：&lt;/p&gt;
+&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;Person&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;name&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.name = name&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; person1 = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Person &lt;span class=&quot;comment&quot;&gt;// person1.name === undefined &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;const&lt;/span&gt; person2 = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Person(&lt;span class=&quot;string&quot;&gt;&#39;Siro&#39;&lt;/span&gt;); &lt;span class=&quot;comment&quot;&gt;// person2.name === &#39;Siro&#39;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;其次，简单看一下&lt;code&gt;new&lt;/code&gt;的大致流程：&lt;/p&gt;
     
     </summary>
     
@@ -76,7 +75,7 @@
     <link href="https://yushen7.github.io/2020/05/15/operate-object/"/>
     <id>https://yushen7.github.io/2020/05/15/operate-object/</id>
     <published>2020-05-15T13:27:17.000Z</published>
-    <updated>2020-06-30T09:05:43.819Z</updated>
+    <updated>2020-06-30T09:14:06.631Z</updated>
     
     <summary type="html">
     
@@ -108,7 +107,7 @@
     <link href="https://yushen7.github.io/2020/05/14/about-meta-viewport/"/>
     <id>https://yushen7.github.io/2020/05/14/about-meta-viewport/</id>
     <published>2020-05-14T01:33:11.000Z</published>
-    <updated>2020-06-30T09:05:43.815Z</updated>
+    <updated>2020-06-30T09:14:06.623Z</updated>
     
     <summary type="html">
     
@@ -121,40 +120,6 @@
 &lt;p&gt;近期好好读了远古时期介绍viewport的博客，准备对这个概念做一个梳理。&lt;/p&gt;
 &lt;p&gt;博客文章地址：&lt;a href=&quot;https://quirksmode.org/mobile/viewports.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;A tale of two viewports — 1&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;没有找出关于&lt;code&gt;viewport&lt;/code&gt;的标准定义，以下内容是结合了该博客viewport概念系列的一家之见。&lt;/p&gt;
-&lt;h1 id=&quot;meta中的viewport&quot;&gt;&lt;a href=&quot;#meta中的viewport&quot; class=&quot;headerlink&quot; title=&quot;meta中的viewport&quot;&gt;&lt;/a&gt;meta中的viewport&lt;/h1&gt;&lt;p&gt;meta中的viewport有几个键值对，写在content里：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;code&gt;initial-scale=n&lt;/code&gt;：初始缩放值，&lt;code&gt;n&lt;/code&gt;为一个数值。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;width=[device-width/n]&lt;/code&gt;：宽度，值可以为&lt;code&gt;device-width&lt;/code&gt;或&lt;code&gt;n&lt;/code&gt;，&lt;code&gt;n&lt;/code&gt;为CSS像素值。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;user-scalable=[yes/no]&lt;/code&gt;：是否允许用户缩放。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;maximum-scale=n&lt;/code&gt;：最大缩放值，&lt;code&gt;n&lt;/code&gt;为一个数值。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;viewport可分为三种：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;code&gt;layout viewport&lt;/code&gt;，该概念与&lt;code&gt;html&lt;/code&gt;元素的宽度相似，对应meta中的viewport。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;visual viewport&lt;/code&gt;，对应可见的viewport，即可见视窗，能看见的范围。（虚拟概念）&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;ideal viewport&lt;/code&gt;，直译过来是：理想情况下的viewport。（虚拟概念）&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;个人认为虚拟概念只是方便理解的，实际上不存在，归根结底还是对DOM的操作，以及可见范围（视窗）的缩放。&lt;/p&gt;
-&lt;p&gt;为PC端开发的网页在移动端上显示的话，由于设备的尺寸原因，绝大多数移动端的浏览器按照桌面端的显示方式显示网页肯定显示不全，所以移动端增添了viewport这一概念，使得在移动端上也能单屏展示一个网页。&lt;/p&gt;
-&lt;p&gt;如下图，同一个网页不设置viewport时，在桌面端和移动端上的显示效果：&lt;/p&gt;
-&lt;img src=&quot;/blog/2020/05/14/about-meta-viewport/pc.png&quot; class=&quot;&quot; title=&quot;pc端&quot;&gt;
-
-&lt;img src=&quot;/blog/2020/05/14/about-meta-viewport/mobile.png&quot; class=&quot;&quot; title=&quot;移动端&quot;&gt;
-
-&lt;p&gt;可以看出一个明显的区别：&lt;strong&gt;移动端的网页明显被缩小了，&lt;/strong&gt;且&lt;code&gt;document.documentElement.clientWidth&lt;/code&gt;为&lt;code&gt;980px&lt;/code&gt;，不同浏览器、手机的值都不一样，该值可以看成&lt;code&gt;layout viewport&lt;/code&gt;的值。&lt;/p&gt;
-&lt;p&gt;这种情况下，需要用户手动放大，才能完全看清楚内容，&lt;/p&gt;
-&lt;p&gt;那么，如果我们想解决移动端缩小网页（或者说强行设置viewport）的问题的话，就可以使用meta中的viewport了。&lt;/p&gt;
-&lt;p&gt;设置：&lt;/p&gt;
-&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;meta&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;name&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;viewport&quot;&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;content&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;width:device-width,initial-scale=1.0&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-
-&lt;p&gt;说明不对viewport进行缩放，该值可以认为是&lt;code&gt;ideal viewport&lt;/code&gt;的值，可以从&lt;code&gt;screen.width&lt;/code&gt;或&lt;code&gt;window.innerWidth&lt;/code&gt;获得。&lt;/p&gt;
-&lt;p&gt;简而言之，这就是&lt;strong&gt;移动端设备&lt;/strong&gt;的物理像素宽度，这个设备有多大，就显示多大的区域。&lt;/p&gt;
-&lt;p&gt;设置之后效果如下：&lt;/p&gt;
-&lt;img src=&quot;/blog/2020/05/14/about-meta-viewport/set_viewport_mobile.png&quot; class=&quot;&quot; title=&quot;After setting viewport&quot;&gt;
-
-&lt;p&gt;这时候再获取一下&lt;code&gt;document.documentElement.clientWidth&lt;/code&gt;就为&lt;code&gt;320px&lt;/code&gt;了。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;所以对viewport的设置实际上可以看作是改变了&lt;code&gt;document.documentElement.clientWidth&lt;/code&gt;的值。&lt;/strong&gt;&lt;/p&gt;
-&lt;h2 id=&quot;总的来说&quot;&gt;&lt;a href=&quot;#总的来说&quot; class=&quot;headerlink&quot; title=&quot;总的来说&quot;&gt;&lt;/a&gt;总的来说&lt;/h2&gt;
     
     </summary>
     
@@ -175,7 +140,7 @@
     <link href="https://yushen7.github.io/2020/05/11/about_line-height/"/>
     <id>https://yushen7.github.io/2020/05/11/about_line-height/</id>
     <published>2020-05-11T01:38:34.000Z</published>
-    <updated>2020-06-30T09:05:43.819Z</updated>
+    <updated>2020-06-30T09:14:06.631Z</updated>
     
     <summary type="html">
     

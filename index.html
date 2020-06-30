@@ -20,12 +20,14 @@
     var CONFIG = {"hostname":"yushen7.github.io","root":"/blog/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Rain&#39;s blog">
+  <meta name="description" content="yoxious的个人博客，记录学习的笔记和思维方法">
+<meta property="og:type" content="website">
+<meta property="og:title" content="yoxious&#39;s blog">
 <meta property="og:url" content="https://yushen7.github.io/index.html">
-<meta property="og:site_name" content="Rain&#39;s blog">
+<meta property="og:site_name" content="yoxious&#39;s blog">
+<meta property="og:description" content="yoxious的个人博客，记录学习的笔记和思维方法">
 <meta property="og:locale" content="en_US">
-<meta property="article:author" content="Rain">
+<meta property="article:author" content="yoxious">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://yushen7.github.io/">
@@ -41,7 +43,7 @@
   };
 </script>
 
-  <title>Rain's blog</title>
+  <title>yoxious's blog</title>
   
 
 
@@ -81,7 +83,7 @@
   </style>
 </noscript>
 
-<link rel="alternate" href="/blog/atom.xml" title="Rain's blog" type="application/atom+xml">
+<link rel="alternate" href="/blog/atom.xml" title="yoxious's blog" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -102,7 +104,7 @@
 
     <a href="/blog/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">Rain's blog</h1>
+      <h1 class="site-title">yoxious's blog</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
@@ -177,17 +179,17 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
-      <meta itemprop="name" content="Rain">
-      <meta itemprop="description" content="">
+      <meta itemprop="name" content="yoxious">
+      <meta itemprop="description" content="yoxious的个人博客，记录学习的笔记和思维方法">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rain's blog">
+      <meta itemprop="name" content="yoxious's blog">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/blog/2020/06/29/about-this/" class="post-title-link" itemprop="url">about-this</a>
+            <a href="/blog/2020/06/29/about-this/" class="post-title-link" itemprop="url">JS中的this</a>
         </h2>
 
         <div class="post-meta">
@@ -204,7 +206,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-30 09:05:43" itemprop="dateModified" datetime="2020-06-30T09:05:43+00:00">2020-06-30</time>
+                <time title="Modified: 2020-06-30 09:14:06" itemprop="dateModified" datetime="2020-06-30T09:14:06+00:00">2020-06-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -250,276 +252,14 @@
 <li>通过<code>apply</code>、<code>call</code>、<code>bind</code>调用：<code>this</code>的值将被绑定为指定值。</li>
 </ol>
 <p>然而，有特殊情况的存在：</p>
-<blockquote>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> value = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> foo = &#123;</span><br><span class="line">      value: <span class="number">2</span>,</span><br><span class="line">      bar: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.value;</span><br><span class="line">      &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//示例1</span></span><br><span class="line"><span class="built_in">console</span>.log(foo.bar()); <span class="comment">// 2</span></span><br><span class="line"><span class="comment">//示例2</span></span><br><span class="line"><span class="built_in">console</span>.log((foo.bar)()); <span class="comment">// 2</span></span><br><span class="line"><span class="comment">//示例3</span></span><br><span class="line"><span class="built_in">console</span>.log((foo.bar = foo.bar)()); <span class="comment">// 1</span></span><br><span class="line"><span class="comment">//示例4</span></span><br><span class="line"><span class="built_in">console</span>.log((<span class="literal">false</span> || foo.bar)()); <span class="comment">// 1</span></span><br><span class="line"><span class="comment">//示例5</span></span><br><span class="line"><span class="built_in">console</span>.log((foo.bar, foo.bar)()); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
-
-<p>例子来自 <a href="https://github.com/mqyqingfeng/Blog/issues/7" target="_blank" rel="noopener">https://github.com/mqyqingfeng/Blog/issues/7</a></p>
-</blockquote>
-<p>所以，有必要从规范解析<code>this</code>到底是如何被指定的。</p>
-<h1 id="函数被调用时的this"><a href="#函数被调用时的this" class="headerlink" title="函数被调用时的this"></a>函数被调用时的this</h1><p>直接看规范12.3.4 Function Calls 的过程：</p>
-<blockquote>
-<p>12.3.4.1 Runtime Semantics: Evaluation</p>
-<p>CallExpression : CallExpression Arguments</p>
-<p>…</p>
-<ol>
-<li><p>Let ref be the result of evaluating CallExpression.</p>
-</li>
-<li><p>Let func be ? GetValue(ref).</p>
-<p>…</p>
-</li>
-<li><p>Return ? EvaluateCall(func, ref, Arguments, tailCall).</p>
-</li>
-</ol>
-<p>12.3.4.2.EvaluateCall ( func, ref, arguments, tailPosition )</p>
-<ol>
-<li><p>If Type(ref) is Reference, then<br>a. If IsPropertyReference(ref) is true, then<br>i. Let thisValue be GetThisValue(ref).<br>b. Else the base of ref is an Environment Record,<br>i. Let refEnv be GetBase(ref).<br>ii. Let thisValue be refEnv.WithBaseObject().</p>
-</li>
-<li><p>Else Type(ref) is not Reference,<br>a. Let thisValue be undefined.</p>
-<p>……</p>
-</li>
-</ol>
-</blockquote>
-<p>可以看到<code>EvaluateCall</code>根据<code>ref</code>确定了<code>this</code>的值。</p>
-<p>总结一下：</p>
-<ol>
-<li>计算<code>CallExpression</code>的结果赋给<code>ref</code></li>
-<li>若<code>Type(ref)</code>为<code>reference</code>则：<ol>
-<li>若<code>IsPropertyReference(ref)</code>为<code>true</code>，则：<ol>
-<li>令<code>this</code>为<code>GetThisValue(ref)</code>的值</li>
-</ol>
-</li>
-<li>否则令<code>ref</code>的<code>base</code>为<code>EnvironmentRecord</code><ol>
-<li>令<code>this</code>为<code>GetBase(ref).WithBaseObject()</code></li>
-</ol>
-</li>
-</ol>
-</li>
-<li>否则令<code>this</code>为<code>undefined</code></li>
-</ol>
-<p>所以，关键在于：</p>
-<ol>
-<li><p>如何根据<code>CallExpression</code>计算<code>ref</code>，<code>ref</code>的类型很重要，如果<code>ref</code>的类型不是<code>reference</code>，那么<code>this</code>直接为<code>undefined</code>。</p>
-<ol start="2">
-<li>如果<code>ref</code>的类型是<code>reference</code>，那么需要知道<code>IsPropertyReference(ref)</code>、<code>GetThisValue(ref)</code>、<code>GetBase(ref)</code>分别干了什么才能确定<code>this</code>。</li>
-</ol>
-</li>
-</ol>
-<h2 id="CallExpression"><a href="#CallExpression" class="headerlink" title="CallExpression"></a>CallExpression</h2><p>第一步计算<code>CallExpression</code>赋给<code>ref</code></p>
-<blockquote>
-<p>Let ref be the result of evaluating CallExpression.</p>
-</blockquote>
-<p>在12.3 Left-Hand-Side Expressions中，MemberExpression包含了以下几种类型：</p>
-<blockquote>
-<ul>
-<li>PrimaryExpression：原始表达式，如：1.1、undefined、变量foo</li>
-<li>MemberExpression[ Expression]：属性访问表达式</li>
-<li>MemberExpression . IdentifierName：属性访问表达式</li>
-<li>MemberExpression TemplateLitera</li>
-<li>SuperProperty：super属性表达式</li>
-<li>MetaProperty</li>
-<li>new MemberExpression Arguments：new表达式</li>
-</ul>
-</blockquote>
-<p>比如foo.bar就是一个MemberExpression。</p>
-<p>函数调用涉及到了CallExpression：</p>
-<blockquote>
-<ul>
-<li>CoverCallExpressionAndAsyncArrowHead</li>
-<li>SuperCall</li>
-<li>CallExpression Arguments：函数调用表达式</li>
-<li>CallExpression [ Expression ]：函数</li>
-<li>CallExpression . IdentifierName：函数表达式的属性访问<br>CallExpression TemplateLiteral：略</li>
-</ul>
-</blockquote>
-<p>比如<code>foo.bar()</code>中的<code>foo.bar</code>是CallExpression。<a href="https://astexplorer.net/#/gist/8b16411cac74187db797974c633bc22f/dae9120a20ec57681cfd9d17dd4bae1a900361a5" target="_blank" rel="noopener">astexplorer</a>将<code>foo</code>描述为标识符（identifier）。</p>
-<p>为什么foo.bar是MemberExpression，又是CallExpression呢？</p>
-<p>答案是：看整体<code>foo.bar()</code>，由两部分组成：CallExpression和Arguments，左边的foo.bar是CallExpression，右边的<code>()</code>是Arguments；而foo.bar这个CallExpression可以细分成MemberExpression . IdentifierName，foo是MemberExpression，bar是IdentifierName，中间<code>.</code>是属性访问符。</p>
-<p>所以，当我们调用<code>foo.bar</code>，计算<code>CallExpression</code>赋给<code>ref</code>时，<code>ref</code>便为foo.bar这个<code>CallExpression</code>的计算结果。</p>
-<h2 id="Type"><a href="#Type" class="headerlink" title="Type"></a>Type</h2><p>第二步判断<code>ref</code>是否为<code>reference</code>。</p>
-<p><code>Type(ref)</code>用于获取<code>ref</code>的类型。</p>
-<p>规范将ECMAScript的类型分为了：语言类型（language types）和规范类型（specification types）。</p>
-<ul>
-<li>语言类型就是描述变量、供开发者直接操作、开发JS的，包括：<code>Undefined, Null, Boolean, String, Symbol, Number,</code>和<code>Object</code>。</li>
-<li>规范类型用于在算法层面描述JS语言的结构以及语言类型的，开发者无法接触，包括：<code>Reference, List, Completion,
-Property Descriptor, Lexical Environment, Environment Record,</code>和<code>Data Block.</code>。这个<code>Reference</code>便和<code>this</code>有极大关联。</li>
-</ul>
-<p>那么<code>Reference</code>类型是：</p>
-<blockquote>
-<p>A Reference is a resolved name or property binding.</p>
-<p>The Reference type is used to explain the behaviour of such operators as delete, typeof, the assignment operators,<br>the super keyword and other language features. </p>
-<p>For example, the left-hand operand of an assignment is expected to<br>produce a reference.</p>
-</blockquote>
-<p>翻译：<strong><code>Reference</code>是一个可解析的名称，如foo；或是属性绑定，这里的属性便是对象的属性，如foo.bar，<code>Reference</code>提供了描述这个名称或属性的信息。</strong><code>Reference</code>类型是用来解释<code>delete</code>、<code>typeof</code>、<code>assignment operators</code>、关键字<code>super</code>以及其他语言的行为的，举个栗子：赋值符号的左操作数便被视为产生了一个<code>Reference</code>。</p>
-<p><code>Reference</code>由三部分组成：<code>base value</code>、<code>referenced name</code>、<code>strict reference</code>。</p>
-<p>其中这三部分的取值：</p>
-<ul>
-<li><code>base value</code>可以是语言类型（<code>String</code>、<code>Object</code>等等）或<code>Environment Record</code>。</li>
-<li><code>referenced name</code>可以是<code>String</code>或<code>Symbol</code>值。</li>
-<li><code>strict reference</code>可以是<code>true</code>或<code>false</code>。</li>
-</ul>
-<p>而<code>GetBase( V )</code>、<code>GetReferencedName ( V )</code>、<code>IsStrictReference( V )</code>便用来分别获取<code>reference</code>的<code>base value</code>、<code>referenced name</code>和<code>strict reference</code>。</p>
-<p>举个<code>reference</code>的栗子：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 简单来讲，这个赋值操作会经历这个过程：...获得lref: GetReferencedName(foo) 获得rval:GetValue(1) =&gt; 对lref进行赋值PutValue(lref,rval)...</span></span><br><span class="line"><span class="keyword">let</span> foo = <span class="number">1</span>; </span><br><span class="line"><span class="comment">//这时候有一个foo的reference，大概是以下的结构</span></span><br><span class="line">fooReference(lref): &#123;</span><br><span class="line">    baseValue: EnvironmentRecord,			</span><br><span class="line">    referencedname: <span class="string">'foo'</span>,</span><br><span class="line">    strictReference: <span class="literal">false</span></span><br><span class="line">&#125;</span><br><span class="line">GetBase(foo) <span class="comment">// EnviromentRecord</span></span><br><span class="line"></span><br><span class="line">GetReferencedName(foo) <span class="comment">// 'foo'</span></span><br><span class="line"></span><br><span class="line">IsStrictReference(foo) <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line">IsPropertyReference(foo) <span class="comment">// EnvironmentRecord =&gt; false</span></span><br></pre></td></tr></table></figure>
-
-<p><code>IsPropertyReference( V )</code>用于根据<code>GetBase( V )</code>是否为对象或基本类型的对象（<code>Boolean, String, Symbol, or Number</code>简单来说就是对象）返回<code>true</code>或<code>false</code>，简述为如果base value是对象，则true，或者说如果这个reference是属性绑定如foo.bar，则是true。</p>
-<p><code>EnviromentRecord</code>可以粗略地理解为本地作用域的记录，记录了标识符的映射（@待勘误）：</p>
-<blockquote>
-<p>An Environment Record records the identifier bindings that are created within the scope of its associated Lexical<br>Environment.</p>
-</blockquote>
-<p>所以，<code>reference</code>除了用于描述那些可解析的名称，如变量、函数等等之外，还可能用于描述属性。如果是属性，那么<code>GetBase(ref)</code>有可能是一个对象，否则是EnviromentRecord。</p>
-<h2 id="GetValue"><a href="#GetValue" class="headerlink" title="GetValue"></a>GetValue</h2><p><strong><code>GetValue( V )</code>用于根据<code>GetBase( V )</code>的值获取<code>V</code>的真正的值（V是一个reference）</strong>，<strong>它返回的始终是一个语言类型的值，而不是规范类型的值</strong>，如：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> foo = <span class="number">1</span>;</span><br><span class="line">GetValue(foo) <span class="comment">// GetBase(foo) =&gt; base = EnviromentRecord =&gt; base.GetBindingValue('foo', false) =&gt; 1</span></span><br><span class="line">foo = &#123;</span><br><span class="line">    bar: <span class="function"><span class="keyword">function</span> <span class="title">iamfunc</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line">GetValue(foo.bar) <span class="comment">// GetBase(foo.bar) =&gt; base = foo =&gt; foo.[Get]('foo', foo) =&gt; function iamfunc()&#123;&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p>计算过程如下：</p>
-<blockquote>
-<ol>
-<li>ReturnIfAbrupt(V).</li>
-<li>If Type(V) is not Reference, return V.</li>
-<li>Let base be GetBase(V).</li>
-<li>If IsUnresolvableReference(V) is true, throw a ReferenceError exception.</li>
-<li>If IsPropertyReference(V) is true, then<br>a. If HasPrimitiveBase(V) is true, then<br>i. Assert: In this case, base will never be undefined or null.<br>ii. Set base to ! ToObject(base).<br>b. Return ? base.[[Get]]（GetReferencedName(V), GetThisValue(V)）.</li>
-<li>Else base must be an Environment Record,<br>a. Return ? base.GetBindingValue(GetReferencedName(V), IsStrictReference(V)) (see 8.1.1).</li>
-</ol>
-</blockquote>
-<h2 id="确定this"><a href="#确定this" class="headerlink" title="确定this"></a>确定this</h2><p>回到代码中：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> value = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> foo = &#123;</span><br><span class="line">   value: <span class="number">2</span>,</span><br><span class="line">   bar: <span class="function"><span class="keyword">function</span> <span class="title">iamfunc</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="keyword">return</span> <span class="keyword">this</span>.value;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>确定this的过程：</p>
-<ol>
-<li><p>计算<code>CallExpression</code>赋给<code>ref</code></p>
-</li>
-<li><p>若<code>Type(ref)</code>为<code>reference</code>则：</p>
-<ul>
-<li><p>2.1 若<code>IsPropertyReference(ref)</code>为<code>true</code>，则：</p>
-</li>
-<li><p>2.2令<code>this</code>为<code>GetThisValue(ref)</code>的值</p>
-</li>
-<li><p>2.3否则令<code>ref</code>的<code>base</code>为<code>EnvironmentRecord</code></p>
-</li>
-<li><p>2.4令<code>this</code>为<code>GetBase(ref).WithBaseObject()</code></p>
-</li>
-</ul>
-</li>
-<li><p>否则令<code>this</code>为<code>undefined</code></p>
-</li>
-</ol>
-<p>第二步<code>Type(ref)</code>则能判定为<code>reference</code>了，且<code>IsPropertyReference(ref)</code>为true，所以计算<code>GetThisValue(ref)</code>赋值给<code>this</code>。</p>
-<p>GetThisValue的过程：</p>
-<blockquote>
-<p>6.2.4.10 GetThisValue ( V )</p>
-<ol>
-<li>Assert: IsPropertyReference(V) is true.</li>
-<li>If IsSuperReference(V) is true, then<br> a. Return the value of the thisValue component of the reference V.</li>
-<li>Return GetBase(V).</li>
-</ol>
-</blockquote>
-<p>简单理解为如果不是Super调用，则返回<code>GetBase(ref)</code>。</p>
-<h3 id="示例1：foo-bar"><a href="#示例1：foo-bar" class="headerlink" title="示例1：foo.bar"></a>示例1：foo.bar</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//示例1</span></span><br><span class="line"><span class="built_in">console</span>.log(foo.bar()); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
-
-<p>前面说到：foo.bar()的形式中，<strong><code>ref</code>是foo.bar这个CallExpression的计算结果</strong>。</p>
-<p>这里根据<code>.</code>属性访问符计算结果，所以查看property accessorsd的计算过程，直接看最后一步：</p>
-<blockquote>
-<p>MemberExpression : MemberExpression . IdentifierName  // foo.bar foo:MemberExpression bar:IdentifierName  </p>
-<p>Return a value of type Reference whose base value component is bv, whose referenced name component is<br>propertyNameString, and whose strict reference flag is strict.</p>
-</blockquote>
-<p><code>.</code>运算符返回了一个reference，这个reference形如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">foo.barReference: &#123;</span><br><span class="line">    baseValue: foo,</span><br><span class="line">    referencedName: <span class="string">'bar'</span>,</span><br><span class="line">    strict: <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>所以<code>Type(ref)</code>为true，继续执行下一步判断：</p>
-<blockquote>
-<p>2.1 若<code>IsPropertyReference(ref)</code>为<code>true</code></p>
-</blockquote>
-<p>ref的baseValue为foo，是对象，所以这一步为true，继续下一步：</p>
-<blockquote>
-<p>2.2 令<code>this</code>为<code>GetThisValue(ref)</code>的值</p>
-</blockquote>
-<p>上面说了，<code>GetThisValue(ref)</code>在这里相当于<code>GetBase(ref)</code>，而ref的baseValue为foo，所以this为foo。</p>
-<h3 id="示例2：-foo-bar"><a href="#示例2：-foo-bar" class="headerlink" title="示例2：(foo.bar)"></a>示例2：(foo.bar)</h3><p>(foo.bar)是CallExpression，<strong><code>ref</code>是(foo.bar)这个CallExpression的计算结果</strong>。</p>
-<p>这里根据<code>()</code>和<code>.</code>运算符计算CallExpression，看12.2.10 The Grouping Operator的计算过程：</p>
-<blockquote>
-<p>ParenthesizedExpression : ( Expression ) </p>
-<p>// (foo.bar) foo.bar: Expression: MemberExpression . IdentifierName</p>
-<ol>
-<li>Return the result of evaluating Expression. This may be of type Reference.</li>
-</ol>
-</blockquote>
-<p>也就是返回了foo.bar的计算结果，那么结果和示例1一样，this为foo。</p>
-<h3 id="示例3：-foo-bar-foo-bar"><a href="#示例3：-foo-bar-foo-bar" class="headerlink" title="示例3：(foo.bar = foo.bar)"></a>示例3：(foo.bar = foo.bar)</h3> <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//示例3</span></span><br><span class="line"><span class="built_in">console</span>.log((foo.bar = foo.bar)()); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
-
-<p>(foo.bar = foo.bar)是CallExpression，<strong><code>ref</code>是(foo.bar = foo.bar)这个CallExpression的计算结果</strong>。</p>
-<p>根据<code>=</code>和<code>()</code>操作符计算CallExpression，所以这里只看<code>=</code>操作符返回的结果：</p>
-<blockquote>
-<p>12.15.4 Runtime Semantics: Evaluation    </p>
-<p>AssignmentExpression : LeftHandSideExpression = AssignmentExpression</p>
-<p>   ….</p>
-<p>​    i. Let rref be the result of evaluating AssignmentExpression.</p>
-<p>​    ii. Let rval be ? GetValue(rref).</p>
-<p>e. Perform ? PutValue(lref, rval).</p>
-<p>f. Return rval.</p>
-<p>….</p>
-</blockquote>
-<p>最终返回了GetValue(rref)，我们不管它确切返回了什么值（结果应该是function iamfunc），<strong>重点是GetValue(rref)返回了一个语言类型的值</strong>，<strong>不是reference</strong>，那么第二步：</p>
-<blockquote>
-<p>2.<code>Type(ref)</code>为<code>reference</code>，则：</p>
-</blockquote>
-<p>肯定是false的，所以执行下一步：</p>
-<blockquote>
-<p>否则令<code>this</code>为<code>undefined</code></p>
-</blockquote>
-<p>所以this为undefined（非严格模式下this是window）。</p>
-<h3 id="示例4：-false-foo-bar"><a href="#示例4：-false-foo-bar" class="headerlink" title="示例4：(false || foo.bar)"></a>示例4：(false || foo.bar)</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//示例4</span></span><br><span class="line"><span class="built_in">console</span>.log((<span class="literal">false</span> || foo.bar)()); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
-
-<p>(false || foo.bar)是CallExpression，<strong><code>ref</code>是(false || foo.bar)这个CallExpression的计算结果</strong>。</p>
-<p>根据<code>||</code>和<code>()</code>操作符计算CallExpression，所以这里只看<code>||</code>操作符返回的结果：</p>
-<blockquote>
-<p>LogicalORExpression : LogicalORExpression || LogicalANDExpression</p>
-<ol>
-<li>Let lref be the result of evaluating LogicalORExpression.</li>
-<li>Let lval be ? GetValue(lref).</li>
-<li>Let lbool be ToBoolean(lval).</li>
-<li>If lbool is true, return lval.</li>
-<li>Let rref be the result of evaluating LogicalANDExpression.</li>
-<li>Return ? GetValue(rref).</li>
-</ol>
-</blockquote>
-<p>最终返回了GetValue(rref)=&gt;function iamfunc，是一个语言类型的值，所以Type(ref)为false，this是undefined。</p>
-<h3 id="示例5：-foo-bar-foo-bar"><a href="#示例5：-foo-bar-foo-bar" class="headerlink" title="示例5：(foo.bar, foo.bar)"></a>示例5：(foo.bar, foo.bar)</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//示例5</span></span><br><span class="line"><span class="built_in">console</span>.log((foo.bar, foo.bar)()); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
-
-<p>(foo.bar, foo.bar)是CallExpression，<strong><code>ref</code>是(foo.bar, foo.bar)这个CallExpression的计算结果</strong>。</p>
-<p>根据<code>,</code>和<code>()</code>操作符计算CallExpression，所以这里只看<code>||</code>操作符返回的结果：</p>
-<blockquote>
-<p>Expression : Expression , AssignmentExpression</p>
-<ol>
-<li>Let lref be the result of evaluating Expression.</li>
-<li>Perform ? GetValue(lref).</li>
-<li>Let rref be the result of evaluating AssignmentExpression.</li>
-<li>Return ? GetValue(rref).</li>
-</ol>
-</blockquote>
-<p>最终返回了GetValue(rref)=&gt;function iamfunc，是一个语言类型的值，所以Type(ref)为false，this是undefined。</p>
-<p>之前错误地以为(foo.bar, foo.bar)会返回foo.bar，其实不是，返回的是GetValue(rref of foo.bar)=&gt;function iamfunc，只是返回了一个语言类型的值。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>至此，归纳一下确定this的值的重点。</p>
-<p>在函数调用的地方，有CallExpression arguments的形式</p>
-<p>首先计算CallExpression的值赋给ref，计算CallExpression就是确定CallExpression的返回值：</p>
-<ol>
-<li><code>.</code>操作符的返回值是reference</li>
-<li><code>,</code>、<code>||</code>、<code>=</code>等操作符会返回GetValue(v)，是语言类型值，非reference</li>
-</ol>
-<p>返回值赋值给ref，如果ref非reference，那么this直接为undefined；如果是reference：</p>
-<ol>
-<li><code>IsPropertyReference</code>判定ref是否是属性绑定，若是，this则为<code>GetThisValue(ref)</code>，即<code>GetBase(ref)</code>，为ref的baseValue，如bar.foo中，ref的baseValue为foo。<ol start="2">
-<li>若不是属性绑定，ref就是一个可解析名称，那么this肯定就为<code>with object</code>和undefined其中一者。</li>
-</ol>
-</li>
-</ol>
-<p>画一张图做总结：</p>
-<img src="/blog/2020/06/29/about-this/create-this-wrapup-workflow.jpg" class="" title="确定this的流程图">
-
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li><a href="https://github.com/mqyqingfeng/Blog/issues/7" target="_blank" rel="noopener">“JavaScript深入之从ECMAScript规范解读this”</a></li>
-<li>ECMA-262 edition 10th </li>
-</ol>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/blog/2020/06/29/about-this/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -542,12 +282,12 @@ Property Descriptor, Lexical Environment, Environment Record,</code>和<code>Dat
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
-      <meta itemprop="name" content="Rain">
-      <meta itemprop="description" content="">
+      <meta itemprop="name" content="yoxious">
+      <meta itemprop="description" content="yoxious的个人博客，记录学习的笔记和思维方法">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rain's blog">
+      <meta itemprop="name" content="yoxious's blog">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -569,7 +309,7 @@ Property Descriptor, Lexical Environment, Environment Record,</code>和<code>Dat
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-30 09:05:43" itemprop="dateModified" datetime="2020-06-30T09:05:43+00:00">2020-06-30</time>
+                <time title="Modified: 2020-06-30 09:14:06" itemprop="dateModified" datetime="2020-06-30T09:14:06+00:00">2020-06-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -611,37 +351,14 @@ Property Descriptor, Lexical Environment, Environment Record,</code>和<code>Dat
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>) </span>&#123;<span class="keyword">this</span>.name = name&#125;;</span><br><span class="line"><span class="keyword">const</span> person1 = <span class="keyword">new</span> Person <span class="comment">// person1.name === undefined </span></span><br><span class="line"><span class="keyword">const</span> person2 = <span class="keyword">new</span> Person(<span class="string">'Siro'</span>); <span class="comment">// person2.name === 'Siro'</span></span><br></pre></td></tr></table></figure>
 
 <p>其次，简单看一下<code>new</code>的大致流程：</p>
-<p>执行<code>Construct(constructor, argList)</code>，这里如果<strong>没问题</strong>的话，最终会执行<code>constructor.[Construct]（argumentsList,newTarget）</code>，所以直接看最终的抽象操作：</p>
-<ol>
-<li><code>argumentsList</code>为参数列表（类数组），<code>newTarget</code>最开始没有指定的话就是<code>constructor</code>。</li>
-<li>赋<code>callerContext</code>为<code>running execution context</code>（当前运行的执行上下文）。</li>
-<li>赋<code>kind</code>为<code>F.[[ConstructorKind]]</code>。<code>F</code>为<code>constructor</code>；<code>F.[[ConstructorKind]]</code>的可能取值为：<code>base</code>或<code>derived</code>。一般定义函数的时候，这个<code>ConstructorKind</code>都为<code>base</code>。</li>
-<li>如果<code>kind</code>为<code>base</code>，则<ol>
-<li>赋<code>thisArgument</code>为一个<code>[[Prototype]]</code>指向<code>Constructor.prototype</code>的<strong>新对象</strong>。</li>
-</ol>
-</li>
-<li>赋<code>calleeContext</code> 为当前执行上下文栈的顶部执行上下文。这一步相当于创建了执行上下文环境等预置工作。</li>
-<li>把<code>thisArgument</code>绑定到当前的上下文环境中。</li>
-<li>…词法环境、函数作用域的构建…</li>
-<li>执行函数<code>constructor</code>，结束后，从执行上下文栈中移除<code>calleeContext</code>。判断<code>constructor</code>返回值是否为对象，如果返回值是对象，则利用这个对象作为返回值，否则使用<code>thisArgument</code>作为返回值。</li>
-</ol>
-<p>简单说就是：</p>
-<ol>
-<li><p>函数调用 + <code>this</code>的生成。</p>
-</li>
-<li><p>相比于函数调用，在函数返回值的时候也做了<code>this</code>的相应处理。</p>
-</li>
-<li><p><code>this</code>是一个<code>[[Prototype]]</code>指向<code>Constructor.prorotype</code>的<strong>新对象</strong>。</p>
-</li>
-</ol>
-<h1 id="模拟new的实现"><a href="#模拟new的实现" class="headerlink" title="模拟new的实现"></a>模拟new的实现</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myNew</span>(<span class="params">fn, ...arguments</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">typeof</span> fn !== <span class="string">'function'</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="built_in">Error</span>(<span class="string">'fn is not a function and can\'t not be a constructor.'</span>);</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> thisArgument = <span class="built_in">Object</span>.create(fn.prototype); </span><br><span class="line">    <span class="keyword">const</span> result = fn.call(thisArgument, ...arguments);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(result &amp;&amp; (<span class="keyword">typeof</span> result === <span class="string">'object'</span> || <span class="keyword">typeof</span> result === <span class="string">'function'</span>)) &#123;</span><br><span class="line">       <span class="keyword">return</span> result;</span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">       <span class="keyword">return</span> thisArgument;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在创建<code>thisArgument</code>创建对象的时候，有一个巨大的坑，如果用：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> thisArgument = <span class="built_in">Object</span>.create(<span class="literal">null</span>);  <span class="comment">//空对象</span></span><br><span class="line">thisArgument.__proto__ = fn.prototype;</span><br></pre></td></tr></table></figure>
-
-<p>这样做是无法关联<code>thisArgument</code>和<code>fn.prototype</code>的，由于空对象不具有原型，也不具有<code>constructor</code>，所以设置<code>__proto__</code>相当于单纯的设置属性，而不是在设置它的原型！</p>
-<p>空对象只要用来存储数据就行了！</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/blog/2020/05/15/about-new-operator/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -664,12 +381,12 @@ Property Descriptor, Lexical Environment, Environment Record,</code>和<code>Dat
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
-      <meta itemprop="name" content="Rain">
-      <meta itemprop="description" content="">
+      <meta itemprop="name" content="yoxious">
+      <meta itemprop="description" content="yoxious的个人博客，记录学习的笔记和思维方法">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rain's blog">
+      <meta itemprop="name" content="yoxious's blog">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -691,7 +408,7 @@ Property Descriptor, Lexical Environment, Environment Record,</code>和<code>Dat
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-30 09:05:43" itemprop="dateModified" datetime="2020-06-30T09:05:43+00:00">2020-06-30</time>
+                <time title="Modified: 2020-06-30 09:14:06" itemprop="dateModified" datetime="2020-06-30T09:14:06+00:00">2020-06-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -770,12 +487,12 @@ Property Descriptor, Lexical Environment, Environment Record,</code>和<code>Dat
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
-      <meta itemprop="name" content="Rain">
-      <meta itemprop="description" content="">
+      <meta itemprop="name" content="yoxious">
+      <meta itemprop="description" content="yoxious的个人博客，记录学习的笔记和思维方法">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rain's blog">
+      <meta itemprop="name" content="yoxious's blog">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -797,7 +514,7 @@ Property Descriptor, Lexical Environment, Environment Record,</code>和<code>Dat
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-30 09:05:43" itemprop="dateModified" datetime="2020-06-30T09:05:43+00:00">2020-06-30</time>
+                <time title="Modified: 2020-06-30 09:14:06" itemprop="dateModified" datetime="2020-06-30T09:14:06+00:00">2020-06-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -843,40 +560,6 @@ Property Descriptor, Lexical Environment, Environment Record,</code>和<code>Dat
 <p>近期好好读了远古时期介绍viewport的博客，准备对这个概念做一个梳理。</p>
 <p>博客文章地址：<a href="https://quirksmode.org/mobile/viewports.html" target="_blank" rel="noopener">A tale of two viewports — 1</a></p>
 <p>没有找出关于<code>viewport</code>的标准定义，以下内容是结合了该博客viewport概念系列的一家之见。</p>
-<h1 id="meta中的viewport"><a href="#meta中的viewport" class="headerlink" title="meta中的viewport"></a>meta中的viewport</h1><p>meta中的viewport有几个键值对，写在content里：</p>
-<ol>
-<li><code>initial-scale=n</code>：初始缩放值，<code>n</code>为一个数值。</li>
-<li><code>width=[device-width/n]</code>：宽度，值可以为<code>device-width</code>或<code>n</code>，<code>n</code>为CSS像素值。</li>
-<li><code>user-scalable=[yes/no]</code>：是否允许用户缩放。</li>
-<li><code>maximum-scale=n</code>：最大缩放值，<code>n</code>为一个数值。</li>
-</ol>
-<p>viewport可分为三种：</p>
-<ol>
-<li><code>layout viewport</code>，该概念与<code>html</code>元素的宽度相似，对应meta中的viewport。</li>
-<li><code>visual viewport</code>，对应可见的viewport，即可见视窗，能看见的范围。（虚拟概念）</li>
-<li><code>ideal viewport</code>，直译过来是：理想情况下的viewport。（虚拟概念）</li>
-</ol>
-<p>个人认为虚拟概念只是方便理解的，实际上不存在，归根结底还是对DOM的操作，以及可见范围（视窗）的缩放。</p>
-<p>为PC端开发的网页在移动端上显示的话，由于设备的尺寸原因，绝大多数移动端的浏览器按照桌面端的显示方式显示网页肯定显示不全，所以移动端增添了viewport这一概念，使得在移动端上也能单屏展示一个网页。</p>
-<p>如下图，同一个网页不设置viewport时，在桌面端和移动端上的显示效果：</p>
-<img src="/blog/2020/05/14/about-meta-viewport/pc.png" class="" title="pc端">
-
-<img src="/blog/2020/05/14/about-meta-viewport/mobile.png" class="" title="移动端">
-
-<p>可以看出一个明显的区别：<strong>移动端的网页明显被缩小了，</strong>且<code>document.documentElement.clientWidth</code>为<code>980px</code>，不同浏览器、手机的值都不一样，该值可以看成<code>layout viewport</code>的值。</p>
-<p>这种情况下，需要用户手动放大，才能完全看清楚内容，</p>
-<p>那么，如果我们想解决移动端缩小网页（或者说强行设置viewport）的问题的话，就可以使用meta中的viewport了。</p>
-<p>设置：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width:device-width,initial-scale=1.0"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>说明不对viewport进行缩放，该值可以认为是<code>ideal viewport</code>的值，可以从<code>screen.width</code>或<code>window.innerWidth</code>获得。</p>
-<p>简而言之，这就是<strong>移动端设备</strong>的物理像素宽度，这个设备有多大，就显示多大的区域。</p>
-<p>设置之后效果如下：</p>
-<img src="/blog/2020/05/14/about-meta-viewport/set_viewport_mobile.png" class="" title="After setting viewport">
-
-<p>这时候再获取一下<code>document.documentElement.clientWidth</code>就为<code>320px</code>了。</p>
-<p><strong>所以对viewport的设置实际上可以看作是改变了<code>document.documentElement.clientWidth</code>的值。</strong></p>
-<h2 id="总的来说"><a href="#总的来说" class="headerlink" title="总的来说"></a>总的来说</h2>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/blog/2020/05/14/about-meta-viewport/#more" rel="contents">
@@ -907,12 +590,12 @@ Property Descriptor, Lexical Environment, Environment Record,</code>和<code>Dat
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
-      <meta itemprop="name" content="Rain">
-      <meta itemprop="description" content="">
+      <meta itemprop="name" content="yoxious">
+      <meta itemprop="description" content="yoxious的个人博客，记录学习的笔记和思维方法">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rain's blog">
+      <meta itemprop="name" content="yoxious's blog">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -934,7 +617,7 @@ Property Descriptor, Lexical Environment, Environment Record,</code>和<code>Dat
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-30 09:05:43" itemprop="dateModified" datetime="2020-06-30T09:05:43+00:00">2020-06-30</time>
+                <time title="Modified: 2020-06-30 09:14:06" itemprop="dateModified" datetime="2020-06-30T09:14:06+00:00">2020-06-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1021,12 +704,12 @@ Property Descriptor, Lexical Environment, Environment Record,</code>和<code>Dat
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
-      <meta itemprop="name" content="Rain">
-      <meta itemprop="description" content="">
+      <meta itemprop="name" content="yoxious">
+      <meta itemprop="description" content="yoxious的个人博客，记录学习的笔记和思维方法">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rain's blog">
+      <meta itemprop="name" content="yoxious's blog">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -1125,12 +808,12 @@ Property Descriptor, Lexical Environment, Environment Record,</code>和<code>Dat
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
-      <meta itemprop="name" content="Rain">
-      <meta itemprop="description" content="">
+      <meta itemprop="name" content="yoxious">
+      <meta itemprop="description" content="yoxious的个人博客，记录学习的笔记和思维方法">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rain's blog">
+      <meta itemprop="name" content="yoxious's blog">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -1280,8 +963,8 @@ Property Descriptor, Lexical Environment, Environment Record,</code>和<code>Dat
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">Rain</p>
-  <div class="site-description" itemprop="description"></div>
+  <p class="site-author-name" itemprop="name">yoxious</p>
+  <div class="site-description" itemprop="description">yoxious的个人博客，记录学习的笔记和思维方法</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
@@ -1332,7 +1015,7 @@ Property Descriptor, Lexical Environment, Environment Record,</code>和<code>Dat
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Rain</span>
+  <span class="author" itemprop="copyrightHolder">yoxious</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>

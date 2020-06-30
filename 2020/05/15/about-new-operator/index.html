@@ -24,12 +24,12 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="认识new操作符">
 <meta property="og:url" content="https://yushen7.github.io/2020/05/15/about-new-operator/index.html">
-<meta property="og:site_name" content="Rain&#39;s blog">
+<meta property="og:site_name" content="yoxious&#39;s blog">
 <meta property="og:description" content="看了冴羽的Javscript博客，同样模拟一下new的功能实现 对于new操作符的认识首先，是使用new的两种方式： 123function Person(name) &amp;#123;this.name &#x3D; name&amp;#125;;const person1 &#x3D; new Person &#x2F;&#x2F; person1.name &#x3D;&#x3D;&#x3D; undefined const person2 &#x3D; new Person(&#39;Si">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-05-15T17:33:11.000Z">
-<meta property="article:modified_time" content="2020-06-30T09:05:43.819Z">
-<meta property="article:author" content="Rain">
+<meta property="article:modified_time" content="2020-06-30T09:14:06.627Z">
+<meta property="article:author" content="yoxious">
 <meta property="article:tag" content="Javascript">
 <meta name="twitter:card" content="summary">
 
@@ -46,7 +46,7 @@
   };
 </script>
 
-  <title>认识new操作符 | Rain's blog</title>
+  <title>认识new操作符 | yoxious's blog</title>
   
 
 
@@ -86,7 +86,7 @@
   </style>
 </noscript>
 
-<link rel="alternate" href="/blog/atom.xml" title="Rain's blog" type="application/atom+xml">
+<link rel="alternate" href="/blog/atom.xml" title="yoxious's blog" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -107,7 +107,7 @@
 
     <a href="/blog/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">Rain's blog</h1>
+      <h1 class="site-title">yoxious's blog</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
@@ -183,12 +183,12 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog/images/avatar.gif">
-      <meta itemprop="name" content="Rain">
-      <meta itemprop="description" content="">
+      <meta itemprop="name" content="yoxious">
+      <meta itemprop="description" content="yoxious的个人博客，记录学习的笔记和思维方法">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rain's blog">
+      <meta itemprop="name" content="yoxious's blog">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -209,7 +209,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-30 09:05:43" itemprop="dateModified" datetime="2020-06-30T09:05:43+00:00">2020-06-30</time>
+                <time title="Modified: 2020-06-30 09:14:06" itemprop="dateModified" datetime="2020-06-30T09:14:06+00:00">2020-06-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -258,6 +258,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name</span>) </span>&#123;<span class="keyword">this</span>.name = name&#125;;</span><br><span class="line"><span class="keyword">const</span> person1 = <span class="keyword">new</span> Person <span class="comment">// person1.name === undefined </span></span><br><span class="line"><span class="keyword">const</span> person2 = <span class="keyword">new</span> Person(<span class="string">'Siro'</span>); <span class="comment">// person2.name === 'Siro'</span></span><br></pre></td></tr></table></figure>
 
 <p>其次，简单看一下<code>new</code>的大致流程：</p>
+<a id="more"></a>
 <p>执行<code>Construct(constructor, argList)</code>，这里如果<strong>没问题</strong>的话，最终会执行<code>constructor.[Construct]（argumentsList,newTarget）</code>，所以直接看最终的抽象操作：</p>
 <ol>
 <li><code>argumentsList</code>为参数列表（类数组），<code>newTarget</code>最开始没有指定的话就是<code>constructor</code>。</li>
@@ -274,12 +275,9 @@
 </ol>
 <p>简单说就是：</p>
 <ol>
-<li><p>函数调用 + <code>this</code>的生成。</p>
-</li>
-<li><p>相比于函数调用，在函数返回值的时候也做了<code>this</code>的相应处理。</p>
-</li>
-<li><p><code>this</code>是一个<code>[[Prototype]]</code>指向<code>Constructor.prorotype</code>的<strong>新对象</strong>。</p>
-</li>
+<li>函数调用 + <code>this</code>的生成。</li>
+<li>相比于函数调用，在函数返回值的时候也做了<code>this</code>的相应处理。</li>
+<li><code>this</code>是一个<code>[[Prototype]]</code>指向<code>Constructor.prorotype</code>的<strong>新对象</strong>。</li>
 </ol>
 <h1 id="模拟new的实现"><a href="#模拟new的实现" class="headerlink" title="模拟new的实现"></a>模拟new的实现</h1><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myNew</span>(<span class="params">fn, ...arguments</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">typeof</span> fn !== <span class="string">'function'</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="built_in">Error</span>(<span class="string">'fn is not a function and can\'t not be a constructor.'</span>);</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> thisArgument = <span class="built_in">Object</span>.create(fn.prototype); </span><br><span class="line">    <span class="keyword">const</span> result = fn.call(thisArgument, ...arguments);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(result &amp;&amp; (<span class="keyword">typeof</span> result === <span class="string">'object'</span> || <span class="keyword">typeof</span> result === <span class="string">'function'</span>)) &#123;</span><br><span class="line">       <span class="keyword">return</span> result;</span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">       <span class="keyword">return</span> thisArgument;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -311,8 +309,8 @@
       <i class="fa fa-chevron-left"></i> JS中的对象
     </a></div>
       <div class="post-nav-item">
-    <a href="/blog/2020/06/29/about-this/" rel="next" title="about-this">
-      about-this <i class="fa fa-chevron-right"></i>
+    <a href="/blog/2020/06/29/about-this/" rel="next" title="JS中的this">
+      JS中的this <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -378,8 +376,8 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">Rain</p>
-  <div class="site-description" itemprop="description"></div>
+  <p class="site-author-name" itemprop="name">yoxious</p>
+  <div class="site-description" itemprop="description">yoxious的个人博客，记录学习的笔记和思维方法</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
@@ -430,7 +428,7 @@
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Rain</span>
+  <span class="author" itemprop="copyrightHolder">yoxious</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
