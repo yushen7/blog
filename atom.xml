@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://yushen7.github.io/"/>
-  <updated>2020-06-28T17:25:26.744Z</updated>
+  <updated>2020-06-30T08:31:27.763Z</updated>
   <id>https://yushen7.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://yushen7.github.io/2020/06/29/about-this/"/>
     <id>https://yushen7.github.io/2020/06/29/about-this/</id>
     <published>2020-06-29T00:53:25.000Z</published>
-    <updated>2020-06-28T17:25:26.744Z</updated>
+    <updated>2020-06-30T08:31:27.763Z</updated>
     
     <summary type="html">
     
@@ -52,7 +52,7 @@
     <link href="https://yushen7.github.io/2020/05/15/about-new-operator/"/>
     <id>https://yushen7.github.io/2020/05/15/about-new-operator/</id>
     <published>2020-05-15T17:33:11.000Z</published>
-    <updated>2020-06-28T17:25:26.744Z</updated>
+    <updated>2020-06-30T08:31:27.763Z</updated>
     
     <summary type="html">
     
@@ -80,7 +80,7 @@
     <link href="https://yushen7.github.io/2020/05/15/operate-object/"/>
     <id>https://yushen7.github.io/2020/05/15/operate-object/</id>
     <published>2020-05-15T13:27:17.000Z</published>
-    <updated>2020-06-28T17:25:26.748Z</updated>
+    <updated>2020-06-30T08:31:27.763Z</updated>
     
     <summary type="html">
     
@@ -114,7 +114,7 @@
     <link href="https://yushen7.github.io/2020/05/14/about-meta-viewport/"/>
     <id>https://yushen7.github.io/2020/05/14/about-meta-viewport/</id>
     <published>2020-05-14T01:33:11.000Z</published>
-    <updated>2020-06-28T17:25:26.744Z</updated>
+    <updated>2020-06-30T08:31:27.759Z</updated>
     
     <summary type="html">
     
@@ -175,7 +175,7 @@
     <link href="https://yushen7.github.io/2020/05/11/about_line-height/"/>
     <id>https://yushen7.github.io/2020/05/11/about_line-height/</id>
     <published>2020-05-11T01:38:34.000Z</published>
-    <updated>2020-06-28T17:25:26.748Z</updated>
+    <updated>2020-06-30T08:31:27.763Z</updated>
     
     <summary type="html">
     
@@ -209,6 +209,36 @@
   </entry>
   
   <entry>
+    <title>JS中的类型转换</title>
+    <link href="https://yushen7.github.io/2020/04/30/type-casting/"/>
+    <id>https://yushen7.github.io/2020/04/30/type-casting/</id>
+    <published>2020-04-30T16:27:17.000Z</published>
+    <updated>2020-06-30T16:27:17.000Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;简单总结一下JS中的部分显/隐式强制类型转换。&lt;/p&gt;
+&lt;h1 id=&quot;1、类型&quot;&gt;&lt;a href=&quot;#1、类型&quot; class=&quot;headerlink&quot; title=&quot;1、类型&quot;&gt;&lt;/a&gt;1、类型&lt;/h1&gt;&lt;p&gt;JS中6种基本类型：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Undefined, Null, Boolean, Number, Symbol, or String&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;以及对象：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;member of the type Object&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;Boolean的真假值&quot;&gt;&lt;a href=&quot;#Boolean的真假值&quot; class=&quot;headerlink&quot; title=&quot;Boolean的真假值&quot;&gt;&lt;/a&gt;Boolean的真假值&lt;/h2&gt;
+    
+    </summary>
+    
+    
+      <category term="Javascript" scheme="https://yushen7.github.io/categories/Javascript/"/>
+    
+    
+      <category term="Javascript" scheme="https://yushen7.github.io/tags/Javascript/"/>
+    
+  </entry>
+  
+  <entry>
     <title>原型与原型链</title>
     <link href="https://yushen7.github.io/2020/04/18/prototype/"/>
     <id>https://yushen7.github.io/2020/04/18/prototype/</id>
@@ -228,34 +258,6 @@
 &lt;li&gt;可通过new调用一个函数，使返回对象的&lt;code&gt;[[prototype]]&lt;/code&gt;和此函数的&lt;code&gt;prototype&lt;/code&gt;建立关联。&lt;/li&gt;
 &lt;li&gt;访问一个对象的属性/方法时，若未在此对象上找到对应的属性/方法，将会沿着原型链一直往上查找，即通过&lt;code&gt;[[prototype]]&lt;/code&gt;查找，直到查找到对应的属性/方法；反之最后会查找到&lt;code&gt;null&lt;/code&gt;，返回&lt;code&gt;undefined&lt;/code&gt;。&lt;/li&gt;
 &lt;/ol&gt;
-    
-    </summary>
-    
-    
-    
-      <category term="Javascript" scheme="https://yushen7.github.io/tags/Javascript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Type Casting</title>
-    <link href="https://yushen7.github.io/2020/04/17/type-casting/"/>
-    <id>https://yushen7.github.io/2020/04/17/type-casting/</id>
-    <published>2020-04-17T14:37:46.000Z</published>
-    <updated>2020-06-28T17:25:26.748Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;简单总结一下JS中的部分显/隐式强制类型转换。&lt;/p&gt;
-&lt;h1 id=&quot;1、类型&quot;&gt;&lt;a href=&quot;#1、类型&quot; class=&quot;headerlink&quot; title=&quot;1、类型&quot;&gt;&lt;/a&gt;1、类型&lt;/h1&gt;&lt;p&gt;JS中6种基本类型：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Undefined, Null, Boolean, Number, Symbol, or String&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;以及对象：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;member of the type Object&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;Boolean的真假值&quot;&gt;&lt;a href=&quot;#Boolean的真假值&quot; class=&quot;headerlink&quot; title=&quot;Boolean的真假值&quot;&gt;&lt;/a&gt;Boolean的真假值&lt;/h2&gt;
     
     </summary>
     
