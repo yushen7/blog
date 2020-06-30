@@ -1,8 +1,12 @@
 ---
-title: Type Casting
-date: 2020-04-17 14:37:46
+title: JS中的类型转换
 tags: Javascript
+date: 2020-04-30 16:27:17
+updated: 2020-06-30 16:27:17
+categories: Javascript
 ---
+
+
 
 简单总结一下JS中的部分显/隐式强制类型转换。
 
@@ -128,7 +132,7 @@ o = {
 o + '' // '2'
 ```
 
-## 3.ToPrimitive
+## 3.ToPrimitive抽象操作
 
 **占坑**
 

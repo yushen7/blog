@@ -1,6 +1,6 @@
 ---
 title: browser-cache
-tags:
+tags: Page Perfomance
 ---
 # 浏览器缓存
 
