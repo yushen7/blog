@@ -1,0 +1,302 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="yoxious"><meta name="copyright" content="yoxious"><meta name="generator" content="Hexo 4.2.1"><meta name="theme" content="hexo-theme-yun"><title>JS中的this | yoxious's blog</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="none" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/star-markdown-css@0.1.17/dist/yun/yun-markdown.min.css"><script src="//at.alicdn.com/t/font_1140697_stqaphw3j4.js" async></script><script src="https://cdn.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>document.addEventListener("DOMContentLoaded", () => {
+  [".post-card",".post-content img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+});
+</script><link rel="shortcut icon" type="image/svg+xml" href="/blog/yun.svg"><link rel="mask-icon" href="/blog/yun.svg" color="#0078E7"><link rel="alternate icon" href="/yun.ico"><link rel="preload" href="/blog/css/hexo-theme-yun.css" as="style"><link rel="preload" href="/blog/js/utils.js" as="script"><link rel="preload" href="/blog/js/hexo-theme-yun.js" as="script"><link rel="prefetch" href="/blog/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="stylesheet" href="/blog/css/hexo-theme-yun.css"><link rel="alternate" href="/blog/atom.xml" title="yoxious's blog"><script id="yun-config">
+    const Yun = window.Yun || {};
+    window.CONFIG = {"root":"/blog/","title":"云游君的小站","version":"0.9.5","anonymous_image":"https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/avatar/none.jpg","say":{"api":"https://v1.hitokoto.cn","hitokoto":true},"fireworks":{"colors":["102, 167, 221","62, 131, 225","33, 78, 194"]}};
+  </script><meta name="description" content="看了冴羽的文章“JavaScript深入之从ECMAScript规范解读this”，决定读一读this的规范定义，梳理一下this。 this存在的场景this存在的场景肯定是函数执行的时候，那么有以下几种调用函数的方式：  直接调用：foo()，foo中this的值将会是window或undeifined，取决于是否是严格模式。 作为对象的方法调用：obj.foo()，this的值将是obj。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS中的this">
+<meta property="og:url" content="https://yushen7.github.io/2020/06/29/about-this/index.html">
+<meta property="og:site_name" content="yoxious&#39;s blog">
+<meta property="og:description" content="看了冴羽的文章“JavaScript深入之从ECMAScript规范解读this”，决定读一读this的规范定义，梳理一下this。 this存在的场景this存在的场景肯定是函数执行的时候，那么有以下几种调用函数的方式：  直接调用：foo()，foo中this的值将会是window或undeifined，取决于是否是严格模式。 作为对象的方法调用：obj.foo()，this的值将是obj。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://yushen7.github.io/blog/2020/06/29/about-this/create-this-wrapup-workflow.jpg">
+<meta property="article:published_time" content="2020-06-29T00:53:25.000Z">
+<meta property="article:modified_time" content="2020-08-07T09:09:07.476Z">
+<meta property="article:author" content="yoxious">
+<meta property="article:tag" content="Javascript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yushen7.github.io/blog/2020/06/29/about-this/create-this-wrapup-workflow.jpg"><link rel="alternate" href="/blog/atom.xml" title="yoxious's blog" type="application/atom+xml">
+</head><body><script defer src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script defer src="/blog/js/ui/fireworks.js"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script defer src="/blog/js/sidebar.js"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="Table of Contents"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-list-ordered"></use></svg></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="Overview"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-passport-line"></use></svg></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/blog/about/" title="yoxious"><img width="96" loading="lazy" src="/blog/Yun.png" alt="yoxious"></a><div class="site-author-name"><a href="/blog/about/">yoxious</a></div><a class="site-name" href="/blog/about/site.html">yoxious's blog</a><sub class="site-subtitle"></sub><div class="site-desciption">yoxious的个人博客，记录学习的笔记和思维方法</div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/blog/" title="Home"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a><div class="site-state-item"><a href="/blog/archives/" title="Archives"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-archive-line"></use></svg></span><span class="site-state-item-count">8</span></a></div><div class="site-state-item"><a href="/blog/categories/" title="Categories"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-2-line"></use></svg></span><span class="site-state-item-count">1</span></a></div><div class="site-state-item"><a href="/blog/tags/" title="Tags"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="site-state-item-count">5</span></a></div><a class="site-state-item hty-icon-button" href="https://yun.yunyoujun.cn" target="_blank" rel="noopener" title="文档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-settings-line"></use></svg></span></a></nav><hr style="margin-bottom:0.5rem"><div class="links-of-author"><a class="links-of-author-item hty-icon-button" rel="noopener" href="/atom.xml" title="RSS" target="_blank" style="color:orange"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-rss-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://shang.qq.com/wpa/qunwpa?idkey=c929e704022704d8cced9ec355d44a3fa7ad34aea12cef1de03d75d3d7d5b059" title="QQ 群" target="_blank" style="color:#12B7F5"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-qq-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://github.com/YunYouJun" title="GitHub" target="_blank" style="color:#6e5494"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-github-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://weibo.com/jizhideyunyoujun" title="微博" target="_blank" style="color:#E6162D"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-weibo-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://www.douban.com/people/yunyoujun/" title="豆瓣" target="_blank" style="color:#007722"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-douban-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://music.163.com/#/user/home?id=247102977" title="网易云音乐" target="_blank" style="color:#C20C0C"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-netease-cloud-music-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://www.zhihu.com/people/yunyoujun/" title="知乎" target="_blank" style="color:#0084FF"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhihu-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://space.bilibili.com/1579790" title="哔哩哔哩" target="_blank" style="color:#FF8EB3"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-bilibili-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://twitter.com/YunYouJun" title="Twitter" target="_blank" style="color:#1da1f2"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-twitter-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://t.me/elpsycn" title="Telegram Channel" target="_blank" style="color:#0088CC"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-telegram-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="mailto:me@yunyoujun.cn" title="E-Mail" target="_blank" style="color:#8E71C1"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-mail-line"></use></svg></a><a class="links-of-author-item hty-icon-button" rel="noopener" href="https://travellings.now.sh/" title="Travelling" target="_blank" style="color:var(--hty-text-color)"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-send-plane-2-line"></use></svg></a></div><hr style="margin:0.5rem 1rem"><div class="links"><a class="links-item hty-icon-button" href="/blog/links/" title="我的小伙伴们" style="color:dodgerblue"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-genderless-line"></use></svg></a></div></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#this存在的场景"><span class="toc-number">1.</span> <span class="toc-text">this存在的场景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#函数被调用时的this"><span class="toc-number">2.</span> <span class="toc-text">函数被调用时的this</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#CallExpression"><span class="toc-number">2.1.</span> <span class="toc-text">CallExpression</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Type"><span class="toc-number">2.2.</span> <span class="toc-text">Type</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GetValue"><span class="toc-number">2.3.</span> <span class="toc-text">GetValue</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#确定this"><span class="toc-number">2.4.</span> <span class="toc-text">确定this</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#示例1：foo-bar"><span class="toc-number">2.4.1.</span> <span class="toc-text">示例1：foo.bar</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#示例2：-foo-bar"><span class="toc-number">2.4.2.</span> <span class="toc-text">示例2：(foo.bar)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#示例3：-foo-bar-foo-bar"><span class="toc-number">2.4.3.</span> <span class="toc-text">示例3：(foo.bar &#x3D; foo.bar)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#示例4：-false-foo-bar"><span class="toc-number">2.4.4.</span> <span class="toc-text">示例4：(false || foo.bar)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#示例5：-foo-bar-foo-bar"><span class="toc-number">2.4.5.</span> <span class="toc-text">示例5：(foo.bar, foo.bar)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-number">4.</span> <span class="toc-text">参考</span></a></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="post-block" itemscope itemtype="https://schema.org/Article"><link itemprop="mainEntityOfPage" href="https://yushen7.github.io/blog/2020/06/29/about-this/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="yoxious"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="yoxious's blog"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">JS中的this</h1><div class="post-meta"><div class="post-time" style="display:inline-block"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-line"></use></svg></span> <time title="Created: 2020-06-29 00:53:25" itemprop="dateCreated datePublished" datetime="2020-06-29T00:53:25+00:00">2020-06-29</time><span class="post-meta-divider">-</span><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-2-line"></use></svg></span> <time title="Modified: 2020-08-07 09:09:07" itemprop="dateModified" datetime="2020-08-07T09:09:07+00:00">2020-08-07</time></div><div class="post-classify"><span class="post-category"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-line"></use></svg></span> <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category" href="/blog/categories/%E7%AC%94%E8%AE%B0/" style="--text-color:dimgray" itemprop="url" rel="index"><span itemprop="text">笔记</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag" href="/blog/tags/Javascript/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="tag-name">Javascript</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body" style="--smc-primary:#0078E7;"><p>看了冴羽的文章<a href="https://github.com/mqyqingfeng/Blog/issues/7" target="_blank" rel="noopener">“JavaScript深入之从ECMAScript规范解读this”</a>，决定读一读<code>this</code>的规范定义，梳理一下this。</p>
+<h1 id="this存在的场景"><a href="#this存在的场景" class="headerlink" title="this存在的场景"></a>this存在的场景</h1><p><code>this</code>存在的场景肯定是<strong>函数执行</strong>的时候，那么有以下几种调用函数的方式：</p>
+<ol>
+<li>直接调用：<code>foo()</code>，<code>foo</code>中<code>this</code>的值将会是<code>window</code>或<code>undeifined</code>，取决于是否是严格模式。</li>
+<li>作为对象的方法调用：<code>obj.foo()</code>，<code>this</code>的值将是<code>obj</code>。</li>
+<li>作为<code>new</code>操作符的一部分调用：<code>new foo()</code>。</li>
+<li>通过<code>apply</code>、<code>call</code>、<code>bind</code>调用：<code>this</code>的值将被绑定为指定值。</li>
+</ol>
+<p>然而，有特殊情况的存在：</p>
+<a id="more"></a>
+<blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> value = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> foo = &#123;</span><br><span class="line">      value: <span class="number">2</span>,</span><br><span class="line">      bar: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.value;</span><br><span class="line">      &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//示例1</span></span><br><span class="line"><span class="built_in">console</span>.log(foo.bar()); <span class="comment">// 2</span></span><br><span class="line"><span class="comment">//示例2</span></span><br><span class="line"><span class="built_in">console</span>.log((foo.bar)()); <span class="comment">// 2</span></span><br><span class="line"><span class="comment">//示例3</span></span><br><span class="line"><span class="built_in">console</span>.log((foo.bar = foo.bar)()); <span class="comment">// 1</span></span><br><span class="line"><span class="comment">//示例4</span></span><br><span class="line"><span class="built_in">console</span>.log((<span class="literal">false</span> || foo.bar)()); <span class="comment">// 1</span></span><br><span class="line"><span class="comment">//示例5</span></span><br><span class="line"><span class="built_in">console</span>.log((foo.bar, foo.bar)()); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<p>例子来自 <a href="https://github.com/mqyqingfeng/Blog/issues/7" target="_blank" rel="noopener">https://github.com/mqyqingfeng/Blog/issues/7</a></p>
+</blockquote>
+<p>所以，有必要从规范解析<code>this</code>到底是如何被指定的。</p>
+<h1 id="函数被调用时的this"><a href="#函数被调用时的this" class="headerlink" title="函数被调用时的this"></a>函数被调用时的this</h1><p>直接看规范12.3.4 Function Calls 的过程：</p>
+<blockquote>
+<p>12.3.4.1 Runtime Semantics: Evaluation</p>
+<p>CallExpression : CallExpression Arguments</p>
+<p>…</p>
+<ol>
+<li><p>Let ref be the result of evaluating CallExpression.</p>
+</li>
+<li><p>Let func be ? GetValue(ref).</p>
+<p>…</p>
+</li>
+<li><p>Return ? EvaluateCall(func, ref, Arguments, tailCall).</p>
+</li>
+</ol>
+<p>12.3.4.2.EvaluateCall ( func, ref, arguments, tailPosition )</p>
+<ol>
+<li><p>If Type(ref) is Reference, then<br>a. If IsPropertyReference(ref) is true, then<br>i. Let thisValue be GetThisValue(ref).<br>b. Else the base of ref is an Environment Record,<br>i. Let refEnv be GetBase(ref).<br>ii. Let thisValue be refEnv.WithBaseObject().</p>
+</li>
+<li><p>Else Type(ref) is not Reference,<br>a. Let thisValue be undefined.</p>
+<p>……</p>
+</li>
+</ol>
+</blockquote>
+<p>可以看到<code>EvaluateCall</code>根据<code>ref</code>确定了<code>this</code>的值。</p>
+<p>总结一下：</p>
+<ol>
+<li>计算<code>CallExpression</code>的结果赋给<code>ref</code></li>
+<li>若<code>Type(ref)</code>为<code>reference</code>则：<ol>
+<li>若<code>IsPropertyReference(ref)</code>为<code>true</code>，则：<ol>
+<li>令<code>this</code>为<code>GetThisValue(ref)</code>的值</li>
+</ol>
+</li>
+<li>否则令<code>ref</code>的<code>base</code>为<code>EnvironmentRecord</code><ol>
+<li>令<code>this</code>为<code>GetBase(ref).WithBaseObject()</code></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>否则令<code>this</code>为<code>undefined</code></li>
+</ol>
+<p>所以，关键在于：</p>
+<ol>
+<li><p>如何根据<code>CallExpression</code>计算<code>ref</code>，<code>ref</code>的类型很重要，如果<code>ref</code>的类型不是<code>reference</code>，那么<code>this</code>直接为<code>undefined</code>。</p>
+<ol start="2">
+<li>如果<code>ref</code>的类型是<code>reference</code>，那么需要知道<code>IsPropertyReference(ref)</code>、<code>GetThisValue(ref)</code>、<code>GetBase(ref)</code>分别干了什么才能确定<code>this</code>。</li>
+</ol>
+</li>
+</ol>
+<h2 id="CallExpression"><a href="#CallExpression" class="headerlink" title="CallExpression"></a>CallExpression</h2><p>第一步计算<code>CallExpression</code>赋给<code>ref</code></p>
+<blockquote>
+<p>Let ref be the result of evaluating CallExpression.</p>
+</blockquote>
+<p>在12.3 Left-Hand-Side Expressions中，MemberExpression包含了以下几种类型：</p>
+<blockquote>
+<ul>
+<li>PrimaryExpression：原始表达式，如：1.1、undefined、变量foo</li>
+<li>MemberExpression[ Expression]：属性访问表达式</li>
+<li>MemberExpression . IdentifierName：属性访问表达式</li>
+<li>MemberExpression TemplateLitera</li>
+<li>SuperProperty：super属性表达式</li>
+<li>MetaProperty</li>
+<li>new MemberExpression Arguments：new表达式</li>
+</ul>
+</blockquote>
+<p>比如foo.bar就是一个MemberExpression。</p>
+<p>函数调用涉及到了CallExpression：</p>
+<blockquote>
+<ul>
+<li>CoverCallExpressionAndAsyncArrowHead</li>
+<li>SuperCall</li>
+<li>CallExpression Arguments：函数调用表达式</li>
+<li>CallExpression [ Expression ]：函数</li>
+<li>CallExpression . IdentifierName：函数表达式的属性访问<br>CallExpression TemplateLiteral：略</li>
+</ul>
+</blockquote>
+<p>比如<code>foo.bar()</code>中的<code>foo.bar</code>是CallExpression。<a href="https://astexplorer.net/#/gist/8b16411cac74187db797974c633bc22f/dae9120a20ec57681cfd9d17dd4bae1a900361a5" target="_blank" rel="noopener">astexplorer</a>将<code>foo</code>描述为标识符（identifier）。</p>
+<p>为什么foo.bar是MemberExpression，又是CallExpression呢？</p>
+<p>答案是：看整体<code>foo.bar()</code>，由两部分组成：CallExpression和Arguments，左边的foo.bar是CallExpression，右边的<code>()</code>是Arguments；而foo.bar这个CallExpression可以细分成MemberExpression . IdentifierName，foo是MemberExpression，bar是IdentifierName，中间<code>.</code>是属性访问符。</p>
+<p>所以，当我们调用<code>foo.bar</code>，计算<code>CallExpression</code>赋给<code>ref</code>时，<code>ref</code>便为foo.bar这个<code>CallExpression</code>的计算结果。</p>
+<h2 id="Type"><a href="#Type" class="headerlink" title="Type"></a>Type</h2><p>第二步判断<code>ref</code>是否为<code>reference</code>。</p>
+<p><code>Type(ref)</code>用于获取<code>ref</code>的类型。</p>
+<p>规范将ECMAScript的类型分为了：语言类型（language types）和规范类型（specification types）。</p>
+<ul>
+<li>语言类型就是描述变量、供开发者直接操作、开发JS的，包括：<code>Undefined, Null, Boolean, String, Symbol, Number,</code>和<code>Object</code>。</li>
+<li>规范类型用于在算法层面描述JS语言的结构以及语言类型的，开发者无法接触，包括：<code>Reference, List, Completion,
+Property Descriptor, Lexical Environment, Environment Record,</code>和<code>Data Block.</code>。这个<code>Reference</code>便和<code>this</code>有极大关联。</li>
+</ul>
+<p>那么<code>Reference</code>类型是：</p>
+<blockquote>
+<p>A Reference is a resolved name or property binding.</p>
+<p>The Reference type is used to explain the behaviour of such operators as delete, typeof, the assignment operators,<br>the super keyword and other language features. </p>
+<p>For example, the left-hand operand of an assignment is expected to<br>produce a reference.</p>
+</blockquote>
+<p>翻译：<strong><code>Reference</code>是一个可解析的名称，如foo；或是属性绑定，这里的属性便是对象的属性，如foo.bar，<code>Reference</code>提供了描述这个名称或属性的信息。</strong><code>Reference</code>类型是用来解释<code>delete</code>、<code>typeof</code>、<code>assignment operators</code>、关键字<code>super</code>以及其他语言的行为的，举个栗子：赋值符号的左操作数便被视为产生了一个<code>Reference</code>。</p>
+<p><code>Reference</code>由三部分组成：<code>base value</code>、<code>referenced name</code>、<code>strict reference</code>。</p>
+<p>其中这三部分的取值：</p>
+<ul>
+<li><code>base value</code>可以是语言类型（<code>String</code>、<code>Object</code>等等）或<code>Environment Record</code>。</li>
+<li><code>referenced name</code>可以是<code>String</code>或<code>Symbol</code>值。</li>
+<li><code>strict reference</code>可以是<code>true</code>或<code>false</code>。</li>
+</ul>
+<p>而<code>GetBase( V )</code>、<code>GetReferencedName ( V )</code>、<code>IsStrictReference( V )</code>便用来分别获取<code>reference</code>的<code>base value</code>、<code>referenced name</code>和<code>strict reference</code>。</p>
+<p>举个<code>reference</code>的栗子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 简单来讲，这个赋值操作会经历这个过程：...获得lref: GetReferencedName(foo) 获得rval:GetValue(1) =&gt; 对lref进行赋值PutValue(lref,rval)...</span></span><br><span class="line"><span class="keyword">let</span> foo = <span class="number">1</span>; </span><br><span class="line"><span class="comment">//这时候有一个foo的reference，大概是以下的结构</span></span><br><span class="line">fooReference(lref): &#123;</span><br><span class="line">    baseValue: EnvironmentRecord,			</span><br><span class="line">    referencedname: <span class="string">'foo'</span>,</span><br><span class="line">    strictReference: <span class="literal">false</span></span><br><span class="line">&#125;</span><br><span class="line">GetBase(foo) <span class="comment">// EnviromentRecord</span></span><br><span class="line"></span><br><span class="line">GetReferencedName(foo) <span class="comment">// 'foo'</span></span><br><span class="line"></span><br><span class="line">IsStrictReference(foo) <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line">IsPropertyReference(foo) <span class="comment">// EnvironmentRecord =&gt; false</span></span><br></pre></td></tr></table></figure>
+
+<p><code>IsPropertyReference( V )</code>用于根据<code>GetBase( V )</code>是否为对象或基本类型的对象（<code>Boolean, String, Symbol, or Number</code>简单来说就是对象）返回<code>true</code>或<code>false</code>，简述为如果base value是对象，则true，或者说如果这个reference是属性绑定如foo.bar，则是true。</p>
+<p><code>EnviromentRecord</code>可以粗略地理解为本地作用域的记录，记录了标识符的映射（@待勘误）：</p>
+<blockquote>
+<p>An Environment Record records the identifier bindings that are created within the scope of its associated Lexical<br>Environment.</p>
+</blockquote>
+<p>所以，<code>reference</code>除了用于描述那些可解析的名称，如变量、函数等等之外，还可能用于描述属性。如果是属性，那么<code>GetBase(ref)</code>有可能是一个对象，否则是EnviromentRecord。</p>
+<h2 id="GetValue"><a href="#GetValue" class="headerlink" title="GetValue"></a>GetValue</h2><p><strong><code>GetValue( V )</code>用于根据<code>GetBase( V )</code>的值获取<code>V</code>的真正的值（V是一个reference）</strong>，<strong>它返回的始终是一个语言类型的值，而不是规范类型的值</strong>，如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> foo = <span class="number">1</span>;</span><br><span class="line">GetValue(foo) <span class="comment">// GetBase(foo) =&gt; base = EnviromentRecord =&gt; base.GetBindingValue('foo', false) =&gt; 1</span></span><br><span class="line">foo = &#123;</span><br><span class="line">    bar: <span class="function"><span class="keyword">function</span> <span class="title">iamfunc</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line">GetValue(foo.bar) <span class="comment">// GetBase(foo.bar) =&gt; base = foo =&gt; foo.[Get]('foo', foo) =&gt; function iamfunc()&#123;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>计算过程如下：</p>
+<blockquote>
+<ol>
+<li>ReturnIfAbrupt(V).</li>
+<li>If Type(V) is not Reference, return V.</li>
+<li>Let base be GetBase(V).</li>
+<li>If IsUnresolvableReference(V) is true, throw a ReferenceError exception.</li>
+<li>If IsPropertyReference(V) is true, then<br>a. If HasPrimitiveBase(V) is true, then<br>i. Assert: In this case, base will never be undefined or null.<br>ii. Set base to ! ToObject(base).<br>b. Return ? base.[[Get]]（GetReferencedName(V), GetThisValue(V)）.</li>
+<li>Else base must be an Environment Record,<br>a. Return ? base.GetBindingValue(GetReferencedName(V), IsStrictReference(V)) (see 8.1.1).</li>
+</ol>
+</blockquote>
+<h2 id="确定this"><a href="#确定this" class="headerlink" title="确定this"></a>确定this</h2><p>回到代码中：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> value = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> foo = &#123;</span><br><span class="line">   value: <span class="number">2</span>,</span><br><span class="line">   bar: <span class="function"><span class="keyword">function</span> <span class="title">iamfunc</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="keyword">return</span> <span class="keyword">this</span>.value;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>确定this的过程：</p>
+<ol>
+<li><p>计算<code>CallExpression</code>赋给<code>ref</code></p>
+</li>
+<li><p>若<code>Type(ref)</code>为<code>reference</code>则：</p>
+<ul>
+<li><p>2.1 若<code>IsPropertyReference(ref)</code>为<code>true</code>，则：</p>
+</li>
+<li><p>2.2令<code>this</code>为<code>GetThisValue(ref)</code>的值</p>
+</li>
+<li><p>2.3否则令<code>ref</code>的<code>base</code>为<code>EnvironmentRecord</code></p>
+</li>
+<li><p>2.4令<code>this</code>为<code>GetBase(ref).WithBaseObject()</code></p>
+</li>
+</ul>
+</li>
+<li><p>否则令<code>this</code>为<code>undefined</code></p>
+</li>
+</ol>
+<p>第二步<code>Type(ref)</code>则能判定为<code>reference</code>了，且<code>IsPropertyReference(ref)</code>为true，所以计算<code>GetThisValue(ref)</code>赋值给<code>this</code>。</p>
+<p>GetThisValue的过程：</p>
+<blockquote>
+<p>6.2.4.10 GetThisValue ( V )</p>
+<ol>
+<li>Assert: IsPropertyReference(V) is true.</li>
+<li>If IsSuperReference(V) is true, then<br> a. Return the value of the thisValue component of the reference V.</li>
+<li>Return GetBase(V).</li>
+</ol>
+</blockquote>
+<p>简单理解为如果不是Super调用，则返回<code>GetBase(ref)</code>。</p>
+<h3 id="示例1：foo-bar"><a href="#示例1：foo-bar" class="headerlink" title="示例1：foo.bar"></a>示例1：foo.bar</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//示例1</span></span><br><span class="line"><span class="built_in">console</span>.log(foo.bar()); <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+
+<p>前面说到：foo.bar()的形式中，<strong><code>ref</code>是foo.bar这个CallExpression的计算结果</strong>。</p>
+<p>这里根据<code>.</code>属性访问符计算结果，所以查看property accessorsd的计算过程，直接看最后一步：</p>
+<blockquote>
+<p>MemberExpression : MemberExpression . IdentifierName  // foo.bar foo:MemberExpression bar:IdentifierName  </p>
+<p>Return a value of type Reference whose base value component is bv, whose referenced name component is<br>propertyNameString, and whose strict reference flag is strict.</p>
+</blockquote>
+<p><code>.</code>运算符返回了一个reference，这个reference形如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">foo.barReference: &#123;</span><br><span class="line">    baseValue: foo,</span><br><span class="line">    referencedName: <span class="string">'bar'</span>,</span><br><span class="line">    strict: <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>所以<code>Type(ref)</code>为true，继续执行下一步判断：</p>
+<blockquote>
+<p>2.1 若<code>IsPropertyReference(ref)</code>为<code>true</code></p>
+</blockquote>
+<p>ref的baseValue为foo，是对象，所以这一步为true，继续下一步：</p>
+<blockquote>
+<p>2.2 令<code>this</code>为<code>GetThisValue(ref)</code>的值</p>
+</blockquote>
+<p>上面说了，<code>GetThisValue(ref)</code>在这里相当于<code>GetBase(ref)</code>，而ref的baseValue为foo，所以this为foo。</p>
+<h3 id="示例2：-foo-bar"><a href="#示例2：-foo-bar" class="headerlink" title="示例2：(foo.bar)"></a>示例2：(foo.bar)</h3><p>(foo.bar)是CallExpression，<strong><code>ref</code>是(foo.bar)这个CallExpression的计算结果</strong>。</p>
+<p>这里根据<code>()</code>和<code>.</code>运算符计算CallExpression，看12.2.10 The Grouping Operator的计算过程：</p>
+<blockquote>
+<p>ParenthesizedExpression : ( Expression ) </p>
+<p>// (foo.bar) foo.bar: Expression: MemberExpression . IdentifierName</p>
+<ol>
+<li>Return the result of evaluating Expression. This may be of type Reference.</li>
+</ol>
+</blockquote>
+<p>也就是返回了foo.bar的计算结果，那么结果和示例1一样，this为foo。</p>
+<h3 id="示例3：-foo-bar-foo-bar"><a href="#示例3：-foo-bar-foo-bar" class="headerlink" title="示例3：(foo.bar = foo.bar)"></a>示例3：(foo.bar = foo.bar)</h3> <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//示例3</span></span><br><span class="line"><span class="built_in">console</span>.log((foo.bar = foo.bar)()); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<p>(foo.bar = foo.bar)是CallExpression，<strong><code>ref</code>是(foo.bar = foo.bar)这个CallExpression的计算结果</strong>。</p>
+<p>根据<code>=</code>和<code>()</code>操作符计算CallExpression，所以这里只看<code>=</code>操作符返回的结果：</p>
+<blockquote>
+<p>12.15.4 Runtime Semantics: Evaluation    </p>
+<p>AssignmentExpression : LeftHandSideExpression = AssignmentExpression</p>
+<p>   ….</p>
+<p>​    i. Let rref be the result of evaluating AssignmentExpression.</p>
+<p>​    ii. Let rval be ? GetValue(rref).</p>
+<p>e. Perform ? PutValue(lref, rval).</p>
+<p>f. Return rval.</p>
+<p>….</p>
+</blockquote>
+<p>最终返回了GetValue(rref)，我们不管它确切返回了什么值（结果应该是function iamfunc），<strong>重点是GetValue(rref)返回了一个语言类型的值</strong>，<strong>不是reference</strong>，那么第二步：</p>
+<blockquote>
+<p>2.<code>Type(ref)</code>为<code>reference</code>，则：</p>
+</blockquote>
+<p>肯定是false的，所以执行下一步：</p>
+<blockquote>
+<p>否则令<code>this</code>为<code>undefined</code></p>
+</blockquote>
+<p>所以this为undefined（非严格模式下this是window）。</p>
+<h3 id="示例4：-false-foo-bar"><a href="#示例4：-false-foo-bar" class="headerlink" title="示例4：(false || foo.bar)"></a>示例4：(false || foo.bar)</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//示例4</span></span><br><span class="line"><span class="built_in">console</span>.log((<span class="literal">false</span> || foo.bar)()); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<p>(false || foo.bar)是CallExpression，<strong><code>ref</code>是(false || foo.bar)这个CallExpression的计算结果</strong>。</p>
+<p>根据<code>||</code>和<code>()</code>操作符计算CallExpression，所以这里只看<code>||</code>操作符返回的结果：</p>
+<blockquote>
+<p>LogicalORExpression : LogicalORExpression || LogicalANDExpression</p>
+<ol>
+<li>Let lref be the result of evaluating LogicalORExpression.</li>
+<li>Let lval be ? GetValue(lref).</li>
+<li>Let lbool be ToBoolean(lval).</li>
+<li>If lbool is true, return lval.</li>
+<li>Let rref be the result of evaluating LogicalANDExpression.</li>
+<li>Return ? GetValue(rref).</li>
+</ol>
+</blockquote>
+<p>最终返回了GetValue(rref)=&gt;function iamfunc，是一个语言类型的值，所以Type(ref)为false，this是undefined。</p>
+<h3 id="示例5：-foo-bar-foo-bar"><a href="#示例5：-foo-bar-foo-bar" class="headerlink" title="示例5：(foo.bar, foo.bar)"></a>示例5：(foo.bar, foo.bar)</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//示例5</span></span><br><span class="line"><span class="built_in">console</span>.log((foo.bar, foo.bar)()); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+
+<p>(foo.bar, foo.bar)是CallExpression，<strong><code>ref</code>是(foo.bar, foo.bar)这个CallExpression的计算结果</strong>。</p>
+<p>根据<code>,</code>和<code>()</code>操作符计算CallExpression，所以这里只看<code>||</code>操作符返回的结果：</p>
+<blockquote>
+<p>Expression : Expression , AssignmentExpression</p>
+<ol>
+<li>Let lref be the result of evaluating Expression.</li>
+<li>Perform ? GetValue(lref).</li>
+<li>Let rref be the result of evaluating AssignmentExpression.</li>
+<li>Return ? GetValue(rref).</li>
+</ol>
+</blockquote>
+<p>最终返回了GetValue(rref)=&gt;function iamfunc，是一个语言类型的值，所以Type(ref)为false，this是undefined。</p>
+<p>之前错误地以为(foo.bar, foo.bar)会返回foo.bar，其实不是，返回的是GetValue(rref of foo.bar)=&gt;function iamfunc，只是返回了一个语言类型的值。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>至此，归纳一下确定this的值的重点。</p>
+<p>在函数调用的地方，有CallExpression arguments的形式</p>
+<p>首先计算CallExpression的值赋给ref，计算CallExpression就是确定CallExpression的返回值：</p>
+<ol>
+<li><code>.</code>操作符的返回值是reference</li>
+<li><code>,</code>、<code>||</code>、<code>=</code>等操作符会返回GetValue(v)，是语言类型值，非reference</li>
+</ol>
+<p>返回值赋值给ref，如果ref非reference，那么this直接为undefined；如果是reference：</p>
+<ol>
+<li><code>IsPropertyReference</code>判定ref是否是属性绑定，若是，this则为<code>GetThisValue(ref)</code>，即<code>GetBase(ref)</code>，为ref的baseValue，如bar.foo中，ref的baseValue为foo。<ol start="2">
+<li>若不是属性绑定，ref就是一个可解析名称，那么this肯定就为<code>with object</code>和undefined其中一者。</li>
+</ol>
+</li>
+</ol>
+<p>画一张图做总结：</p>
+<img src="/blog/2020/06/29/about-this/create-this-wrapup-workflow.jpg" class="" title="确定this的流程图" loading="lazy">
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li><a href="https://github.com/mqyqingfeng/Blog/issues/7" target="_blank" rel="noopener">“JavaScript深入之从ECMAScript规范解读this”</a></li>
+<li>ECMA-262 edition 10th </li>
+</ol>
+</div><div id="reward-container"><span class="hty-icon-button button-glow" id="reward-button" title="Donate" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === &quot;none&quot;) ? &quot;block&quot; : &quot;none&quot;;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-hand-coin-line"></use></svg></span><div id="reward-comment">I'm so cute. Please give me money.</div><div id="qr" style="display:none;"><div style="display:inline-block"><a href="https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/donate/alipay-qrcode.jpg" target="_blank" rel="noopener"><img loading="lazy" src="https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/donate/alipay-qrcode.jpg" alt="支付宝" title="支付宝"></a><div><span style="color:#00A3EE"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-alipay-line"></use></svg></span></div></div><div style="display:inline-block"><a href="https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/donate/qqpay-qrcode.png" target="_blank" rel="noopener"><img loading="lazy" src="https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/donate/qqpay-qrcode.png" alt="QQ 支付" title="QQ 支付"></a><div><span style="color:#12B7F5"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-qq-line"></use></svg></span></div></div><div style="display:inline-block"><a href="https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/donate/wechatpay-qrcode.jpg" target="_blank" rel="noopener"><img loading="lazy" src="https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/donate/wechatpay-qrcode.jpg" alt="微信支付" title="微信支付"></a><div><span style="color:#2DC100"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-wechat-pay-line"></use></svg></span></div></div></div></div><ul class="post-copyright"><li class="post-copyright-author"><strong>Post author: </strong>yoxious</li><li class="post-copyright-link"><strong>Post link: </strong><a href="https://yushen7.github.io/2020/06/29/about-this/" title="JS中的this">https://yushen7.github.io/2020/06/29/about-this/</a></li><li class="post-copyright-license"><strong>Copyright Notice: </strong>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" title="CC BY-NC-SA 4.0 "><svg class="icon"><use xlink:href="#icon-creative-commons-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-by-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-nc-line"></use></svg><svg class="icon"><use xlink:href="#icon-creative-commons-sa-line"></use></svg></a> unless stating additionally.</li></ul></section></article><div class="post-nav"><div class="post-nav-item"></div><div class="post-nav-item"><a class="post-nav-next" href="/blog/2020/05/15/about-new-operator/" rel="next" title="认识new操作符"><span class="post-nav-text">认识new操作符</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-right-s-line"></use></svg></a></div></div></div><div id="comment"><div class="comment-tooltip text-center"><span>点击按钮跳转 GitHub Issues 评论。</span><br><span>若没有本文 Issue，您可以使用 Comment 模版新建。</span><br><a class="hty-button hty-button--raised" id="github-issues" href="https://github.com/YunYouJun/yunyoujun.github.io/issues?q=is:issue+JS中的this" target="_blank" rel="noopener">GitHub Issues</a></div></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2019 – 2020 </span><span class="with-love" id="animate"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-cloud-line"></use></svg></span><span class="author"> yoxious</span></div><div class="powered"><span>Powered by <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> v4.2.1</span><span class="footer-separator">|</span><span>Theme - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v0.9.5</span></div></footer><a class="hty-icon-button" id="goUp" aria-label="back-to-top" href="#"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-up-s-line"></use></svg><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a></div><script defer src="/blog/js/utils.js"></script><script defer src="/blog/js/hexo-theme-yun.js"></script></body></html>
