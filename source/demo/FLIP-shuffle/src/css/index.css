@@ -1,0 +1,21 @@
+#app {
+  text-align: center;
+}
+.bound {
+  margin: 20px;
+  display: inline-block;
+}
+.cell {
+  display: inline-block;
+  width: 25px;
+  line-height: 25px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  text-align: center;
+}
+.move {
+  transition: transform 1s ease-out;
+}
+/* .tools-bar {
+  text-align: left;
+}  */
