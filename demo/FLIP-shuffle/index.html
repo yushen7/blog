@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./src/css/index.css">
+</head>
+<body>
+  <div id="app">
+    <div class="tools-bar">
+      <button class="shuffle-btn" @click="shuffleEls">shuffle it!</button>
+    </div >
+
+    <div ref="bound" class="bound">
+
+      <div class="cell" v-for="renderItem in renderList" :key="renderItem.id">
+        {{ renderItem.number }}
+      </div>
+
+    </div >
+
+  </div >
+
+  <script src="./src/vue.min.js"></script>
+  <script src="./src/utils/shuffle.js"></script>
+  <script src="./index.js"></script>
+
+</body>
+</html>
